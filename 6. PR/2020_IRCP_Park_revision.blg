@@ -1,0 +1,46 @@
+This is BibTeX, Version 0.99d (TeX Live 2018/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: 2020_IRCP_Park_revision.aux
+The style file: apsr.bst
+Database file #1: 19AuthWelfare.bib
+You've used 8 entries,
+            2874 wiz_defined-function locations,
+            697 strings with 6050 characters,
+and the built_in function-call counts, 34814 in all, are:
+= -- 5746
+> -- 379
+< -- 0
++ -- 2707
+- -- 135
+* -- 2942
+:= -- 6992
+add.period$ -- 32
+call.type$ -- 8
+change.case$ -- 104
+chr.to.int$ -- 8
+cite$ -- 8
+duplicate$ -- 127
+empty$ -- 257
+format.name$ -- 141
+if$ -- 6258
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 12
+newline$ -- 39
+num.names$ -- 94
+pop$ -- 45
+preamble$ -- 1
+purify$ -- 120
+quote$ -- 0
+skip$ -- 98
+stack$ -- 0
+substring$ -- 8100
+swap$ -- 16
+text.length$ -- 112
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 24
+warning$ -- 0
+while$ -- 187
+width$ -- 0
+write$ -- 117

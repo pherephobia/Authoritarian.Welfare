@@ -1,0 +1,6 @@
+\babel@toc {english}{}
+\beamer@sectionintoc {1}{Research Question}{3}{0}{1}
+\beamer@sectionintoc {2}{Theory}{8}{0}{2}
+\beamer@sectionintoc {3}{Data and Empirical Specification}{13}{0}{3}
+\beamer@sectionintoc {4}{Empirical Analysis}{18}{0}{4}
+\beamer@sectionintoc {5}{Conclusion}{23}{0}{5}

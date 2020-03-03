@@ -1,0 +1,48 @@
+This is BibTeX, Version 0.99d (TeX Live 2018/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: Park_2020_Authoritarian_Welfare_IRCP.aux
+The style file: apsr.bst
+Database file #1: 19AuthWelfare.bib
+Warning--empty note in Bizzarro2017
+You've used 87 entries,
+            2874 wiz_defined-function locations,
+            1219 strings with 18162 characters,
+and the built_in function-call counts, 317175 in all, are:
+= -- 51670
+> -- 3459
+< -- 2
++ -- 23731
+- -- 1262
+* -- 26712
+:= -- 64280
+add.period$ -- 350
+call.type$ -- 87
+change.case$ -- 1131
+chr.to.int$ -- 87
+cite$ -- 88
+duplicate$ -- 1361
+empty$ -- 2985
+format.name$ -- 1362
+if$ -- 56902
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 99
+newline$ -- 376
+num.names$ -- 975
+pop$ -- 350
+preamble$ -- 1
+purify$ -- 1305
+quote$ -- 0
+skip$ -- 1144
+stack$ -- 0
+substring$ -- 72452
+swap$ -- 205
+text.length$ -- 1220
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 318
+warning$ -- 1
+while$ -- 2050
+width$ -- 0
+write$ -- 1205
+(There was 1 warning)

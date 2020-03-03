@@ -1,0 +1,101 @@
+\documentclass[11pt]{article}
+\usepackage{setspace}
+\doublespacing
+\usepackage{geometry}
+\usepackage{titling}
+\usepackage{blindtext}
+\geometry{margin=1in}
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage[fleqn]{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage[affil-it]{authblk}
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\hypersetup{
+	colorlinks   = true, %Colours links instead of ugly boxes
+	urlcolor     = blue, %Colour for external hyperlinks
+	linkcolor    = blue, %Colour of internal links
+	citecolor   = blue %Colour of citations,
+}
+\usepackage{xcolor}
+\usepackage{lettrine}
+\usepackage{longtable}
+\usepackage{afterpage}
+\usepackage{booktabs}
+\usepackage[utf8]{inputenc}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{adjustbox}
+\usepackage{ntheorem}
+\theoremseparator{:}
+\newtheorem{hyp}{Hypothesis}
+\usepackage[toc,title,page]{appendix}
+
+\makeatletter % <=======================================================
+\renewcommand\@seccntformat[1]{}
+\renewcommand{\@makefntext}[1]{%
+	\setlength{\parindent}{0pt}%
+	\begin{list}{}{\setlength{\labelwidth}{6mm}% 1.5em <==================
+			\setlength{\leftmargin}{\labelwidth}%
+			\setlength{\labelsep}{3pt}%
+			\setlength{\itemsep}{0pt}%
+			\setlength{\parsep}{0pt}%
+			\setlength{\topsep}{0pt}%
+			\footnotesize}%
+		\item[\@thefnmark\hfil]#1% @makefnmark
+	\end{list}%
+}
+
+\makeatother % <========================================================
+
+
+\begin{document}
+	
+\begin{table}[htbp]\centering
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\caption{Class Coalitions, and Welfare Programs}
+\begin{tabular}{l*{6}{c}}
+\hline\hline
+                    &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+                    &     Old-age         &       Mater         &        Sick         &     Working         &     Unempl.         &      Family         \\
+\hline
+Working class       &       0.075         &       0.158         &       0.220\sym{*}  &      -0.019         &      -0.062         &       0.031         \\
+                    &     (0.091)         &     (0.088)         &     (0.086)         &     (0.059)         &     (0.061)         &     (0.060)         \\
+[1em]
+Urban middle        &       0.043         &      -0.053         &       0.058         &      -0.110         &      -0.087         &       0.015         \\
+                    &     (0.128)         &     (0.123)         &     (0.106)         &     (0.069)         &     (0.278)         &     (0.085)         \\
+[1em]
+Party elites        &       0.111\sym{*}  &       0.149\sym{***}&       0.145\sym{**} &       0.101\sym{***}&       0.060         &       0.056         \\
+                    &     (0.045)         &     (0.037)         &     (0.046)         &     (0.029)         &     (0.057)         &     (0.031)         \\
+[1em]
+Ln.Pop.             &       0.270\sym{***}&       0.064         &       0.124         &       0.014         &       0.126\sym{**} &       0.070         \\
+                    &     (0.073)         &     (0.066)         &     (0.070)         &     (0.043)         &     (0.043)         &     (0.044)         \\
+[1em]
+Resource Dep.       &      -0.002         &      -0.002         &       0.001         &      -0.001         &      -0.002         &      -0.001         \\
+                    &     (0.002)         &     (0.002)         &     (0.002)         &     (0.001)         &     (0.001)         &     (0.001)         \\
+[1em]
+Country Dummies     &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+[1em]
+WWI Dummies         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+[1em]
+WWII Dummies        &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+[1em]
+Cold War Dummies    &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+[1em]
+P.I. Indicators     &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+\hline
+Observations        &        3381         &        3309         &        3313         &        3037         &        3421         &        3406         \\
+\(R^{2}\)           &       0.745         &       0.775         &       0.733         &       0.906         &       0.884         &       0.850         \\
+\hline\hline
+\multicolumn{7}{l}{\footnotesize Standard errors in parentheses}\\
+\multicolumn{7}{l}{\footnotesize OLS with panel corrected standard errors. Panel-Corrected Standard Errors reported in parentheses.}\\
+\multicolumn{7}{l}{\footnotesize Constant, period dummies and country dummies not displayed.}\\
+\multicolumn{7}{l}{\footnotesize \sym{*} \(p<0.05\), \sym{**} \(p<0.01\), \sym{***} \(p<0.001\)}\\
+\end{tabular}
+\end{table}
+\end{document}

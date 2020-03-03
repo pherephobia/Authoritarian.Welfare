@@ -1,0 +1,242 @@
+
+\documentclass{Bredelebeamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scrextend}
+\usepackage{booktabs}
+\changefontsizes{10pt}
+\usepackage{natbib}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\newcommand\Fontvi{\fontsize{6}{7.2}\selectfont}
+\bibpunct{(}{)}{;}{a}{}{,}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Why Do Authoritarian Regimes Provide Welfare?}
+% Title
+
+% Optional subtitle
+\author{Sanghoon Park \inst{1}}
+% The \ inst {...} command displays the speaker's affiliation.
+% If there are several speakers: Marcel Dupont \ inst {1}, Roger Durand \ inst {2}
+% Just add another institute to the model below.
+\institute[University of South Carolina]
+{
+  \inst{1}%
+  University of South Carolina\\Department of Political Science}
+\date{\today}
+% Optional. The date, usually the day of the conference
+\subject{World Congress Presentation (6/26/2019)}
+% It's used in PDF metadata
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Summary}
+  \tableofcontents[hideallsubsections]
+  % possibility of adding the option [pausesections]
+\end{frame}
+
+\section{Research Question}
+\begin{frame}{Motivation}
+	\begin{itemize}
+		\item \textit{Major Topic}: Distribution and Redistribution
+		\begin{itemize}
+			\item Initial modern welfare state \pause $\rightarrow$ Germany of 1880s.
+			\item Still, non-democracies provide welfare programs
+		\end{itemize} \pause
+		\item Existing Studies of welfare require fully democratic regime \pause
+		\begin{itemize}
+			\item Compensations \citep{Boix2001a,Adsera2002} 
+			\item Power resources \citep{Huber1993,Bradley2003,Lupu2011,Lim2016} 
+			\item Median Voters \citep{Meltzer1981,Iversen2006} 
+		\end{itemize}\pause
+		\item How can we explain why authoritarian regimes provide welfare?
+	\end{itemize}	
+\end{frame}
+
+\section{Theory}
+\begin{frame}{Not every authoritarian regime is the	same.}
+\begin{itemize}
+	\item In reality, we can observe authoritarian regimes have distinctive leadership groups \citep{Geddes2014}. 
+	\item Generally, studies have a consensus that the party based regime has a larger
+	coalition compared to the personalist regime, which has a small coalition to remain in office \citep{Levitsky2002,Levitsky2010,Gandhi2009}.
+\end{itemize}
+The welfare state literature + Empirical observations of authoritarian welfare provisions.
+\begin{itemize}
+	\item Given the fact that (i) authoritarian regimes can be seen as the diminished form of democracies and (ii) authoritarian regimes have variations,
+	\item Some forms of authoritarian regimes are more likely to provide welfare.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Class coalition, and cooptation}
+Even though some autocrats use forces and coercions to rule the regime, not all do.
+\begin{itemize}
+	\item Two fundamental problems of autocrats, which cannot be solved by a single strategy \citep{Svolik2012}.
+	\begin{enumerate}
+		\item Problem of power-sharing, which is about challenges from the elites.
+		\item Problem of control in which autocrats face threats from the masses they
+		rule.
+	\end{enumerate}
+	\item Autocrats may have two strategies of coercion and cooptation \citep{Gandhi2007,Wright2008}
+	\item Then, who is the target of cooptation? \pause $\rightarrow$  The critical supporting groups, which establishes the ruling coalition.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Class coalition, and cooptation}
+	\begin{itemize}
+		\item How to identify the groups for ruling coalition?
+		\begin{itemize}
+			\item Party institutionalization \citep{Rasmussen2019}
+			\begin{itemize}
+				\item The more autocrats with institutionalized parties want to maintain power, the more likely they are to run universal social policies
+			\end{itemize}
+		\end{itemize}
+		\item However, we cannot assume that parties in authoritarian regimes are identical to those in democracies.
+		\begin{itemize}
+			\item Not only party institutionalization, but the types of welfare can show the different class-coalition tendency across authoritarian regimes.
+			\item The types of welfare delivery (cash benefits versus service benefits) would vary depending on the regime types \citep{Bambra2005}.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Class coalition, and cooptation}
+\begin{itemize}
+  \item \textit{H$_1$}: When party institutionalization increases, welfare programs become universal \textit{de jure} (in terms of enacted and formal laws) and \textit{de facto} (in terms of the coverage of social groups).
+  \item \textit{H$_2$}: Given party institutionalization, different authoritarian regimes increases different welfare programs closely related to their relevant class coalition \textit{de jure} (in terms of enacted and formal laws) and \textit{de facto} (in terms of the coverage of social groups).
+\end{itemize}
+\end{frame}
+
+\section{Data and Empirical Specification}
+\begin{frame}{Welfare Programs}
+	\begin{itemize}
+		\item DV: Welfare Encompassingness and Univeralsim
+		\begin{itemize}
+			\item Social Policy around the World (SPaW) Database \citep{Rasmussen2016}
+			\item \textit{Encompassingness}: whether there is a major, national welfare law for each of the following risks.
+			\item \textit{Universalism}: Range from 0–9, maximum 9-scores indicate all residents are automatically entitled to benefits, a fully universal system.
+			\item The dataset covers 154 countries from 1790 to 2013.
+		\end{itemize} 
+	\end{itemize}
+\end{frame}	
+
+\begin{frame}{Welfare Programs}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\linewidth]{"../4. Figures/Figure0"}
+	\caption{Global Trends of Welfare Programs by Regime Types}
+	\label{fig:figure0}
+\end{figure}
+\end{frame}	
+
+\begin{frame}{Class coalition cooptation}
+	\begin{itemize}
+		\item Distinct platforms (\textit{v2psplats}): how many parties among those with representation in the legislature have publicly available, and distinct, party platforms.
+		\item Constituency linkages(\textit{v2psprlnks}): the most common form of linkage between parties and their constituents across all major parties.
+		\item Particularistic versus public goods (\textit{v2dlencmps}, hereafter \texttt{Type of Goods}): the tendency of rent-seeking of autocrats regardless of the party linkage.
+	\end{itemize}
+\end{frame}
+\begin{frame}
+Authoritarian regime types from Autocratic Regimes dataset of \citet{Geddes2014}.
+\begin{itemize}
+	\item The interests represented in the leadership group help to explain and predict the behavior of authoritarian regime while they remain in power.
+	\item Dominant-party, monarchy, military, and personal regimes covering 4,591 		observations from 1946 to 2010.
+\end{itemize}
+Also, several covariates to control the confounding influence on primary explanatory, and dependent variables are included:
+\begin{itemize}
+	\item \textit{Trade openness, the logged GDP per capita, the percentage of Elderly Population, the percentage of the Youth Population, urbanization, the size of military, resource dependence}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Model Specification}
+\begin{itemize}
+	\item Data: unbalanced, pooled time-series cross-sectional data of class coalition cooptation variables, authoritarian regime types, and welfare programs
+	\begin{itemize}
+		\item Coverage: 74 autocracies, respectively, during the period 1816–2013. 
+	\end{itemize}
+	\item Ordinary least squares (OLS) estimator with panel-corrected standard errors.
+	\begin{itemize}
+		\item Time- and unit- fixed effect included.
+		\item All explanatory variables are lagged by 3 years.
+	\end{itemize}
+\end{itemize} 
+\end{frame}
+
+\section{Empirical Analysis}
+\begin{frame}{Party Institutionalization and Welfare}
+\begin{figure}
+	\centering
+	\includegraphics[width=0.7\textwidth]{"../4. Figures/Coefplot1"}
+	\caption{Party Institutionalization and Welfare Encompassingness}
+	\label{fig:coefplot1}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Party Institutionalization and Welfare}
+	\begin{figure}
+		\centering
+		\includegraphics[width=0.7\textwidth]{"../4. Figures/Coefplot2"}
+		\caption{Party Institutionalization and Welfare Universalism}
+		\label{fig:coefplot2}
+	\end{figure}
+\end{frame}
+
+\begin{frame}{Disaggregated Universalisms}
+\begin{figure}
+	\centering
+	\includegraphics[width=1\textwidth]{"../4. Figures/Coefplot3"}
+	\caption{Party Institutionalization and Disaggregated Universalism}
+	\label{fig:coefplot3}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Class coalition, Welfare Benefits}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{"../4. Figures/margins1"}
+	\caption{Marginsplot by regime type on Cash benefits}
+	\label{fig:marginscash}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Class coalition, Welfare Benefits}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{"../4. Figures/margins2"}
+		\caption{Marginsplot by regime type on non-Cash benefits}
+		\label{fig:marginsnon}
+	\end{figure}
+\end{frame}
+
+\section{Conclusion}
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item The first hypothesis is partially confirmed since
+		the party institutionalization only increases the \textit{Encompassingness}, which means the coverage of risk-areas. 
+		\begin{itemize}
+			\item Why? $\rightarrow$ Disaggregate \textit{Universalism} by programs
+			\item I find that party institutionalization does not
+			have equal influence on the different welfare programs.
+			\item There is no reason to assume that parties have inherent features to expand welfare programs.
+		\end{itemize} 
+		\item How about Class-coalition cooptation?
+		\begin{itemize}
+			\item Autocrats would want to deliver the resources they promised through the channel without autocrats’ private goods.
+			rule. 
+			\item Welfare programs are expected to be different depending on the groups on which the autocrat depends for support.
+			\item The influence of party institutionalization 			conditional on different welfare programs depends on the class coalition—authoritarian regime types.
+		\end{itemize}
+	\end{itemize}	
+\end{frame}
+
+\begin{frame}<beamer:0>
+	\bibliographystyle{apsr}
+	\bibliography{19AuthWelfare.bib}
+\end{frame}
+\end{document}

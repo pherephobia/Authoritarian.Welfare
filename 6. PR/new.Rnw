@@ -1,0 +1,177 @@
+
+\documentclass{Bredelebeamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scrextend}
+\changefontsizes{10pt}
+\usepackage{natbib}
+\newcommand\Fontvi{\fontsize{6}{7.2}\selectfont}
+\bibpunct{(}{)}{;}{a}{}{,}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Wars and Survival}
+% Title
+\subtitle{Leader-Centric Explanations}
+% Optional subtitle
+\author{Sanghoon Park \inst{1}}
+% The \ inst {...} command displays the speaker's affiliation.
+% If there are several speakers: Marcel Dupont \ inst {1}, Roger Durand \ inst {2}
+% Just add another institute to the model below.
+\institute[University of South Carolina]
+{
+  \inst{1}%
+  University of South Carolina\\Department of Political Science}
+\date{\today}
+% Optional. The date, usually the day of the conference
+\subject{W13\_DD}
+% It's used in PDF metadata
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Summary}
+  \tableofcontents[hideallsubsections]
+  % possibility of adding the option [pausesections]
+\end{frame}
+
+\section{Overview}
+\begin{frame}{Overview}
+	\begin{itemize}
+		\item[] So far,
+		\begin{itemize}
+			\item Origins of dictatorships
+			\item Conceptualizing dictatorships
+			\item Authoritarian institutions
+			\item Strategies of control
+			\item Outcomes of authoritarian regimes $\rightarrow$ War and Survival
+		\end{itemize}
+	\end{itemize}	
+\end{frame}
+\begin{frame}{Overview}
+	\begin{itemize}
+		\item[] War: Foreign policy decision
+		\item[] Survival: Main goal of autocrats
+		\begin{itemize}
+			\item How do different domestic institutions affect policy decisions of leaders?
+			\item How do domestic institutions affect tenure of leaders?
+			\item How do domestic institutions affect the relationship between international conflict and tenure of leaders?		
+		\end{itemize}
+		\item The reading materials: domestic political institutions $\rightarrow$ autocrats' motivation of policy decisions.
+	\end{itemize}
+
+\section{\cite{Weeks2008}}
+\begin{frame}{Main Question}
+
+\end{frame}
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+\section{\cite{Fjelde2010}}
+\begin{frame}{Main Question}
+
+\end{frame}
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+
+
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}	
+
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+\section{\cite{Debs2010}}
+\begin{frame}{Main Question}
+
+\end{frame}
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+
+
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+
+\section{\cite{Bak2017}}
+\begin{frame}{Main Question}
+
+\end{frame}
+
+\begin{frame}{The Theory \& Argument}
+
+\end{frame}
+
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+\begin{frame}{Hypotheses \& Empirical Results}
+
+\end{frame}
+
+\section{References}
+\begin{frame}{References}
+\bibliographystyle{apsr}
+\bibliography{W13.bib}
+\end{frame}
+
+
+\begin{frame}{Questions}
+	
+\end{frame}
+
+
+\end{document}

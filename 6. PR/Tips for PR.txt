@@ -1,0 +1,41 @@
+
+
+Pink Policing: Gendered Differences in Behavior in Masculine Environments.
+
+Authors: Kelsey Shoub, Katelyn E. Stauffer, and Miyeon Song
+
+First, color and brandizing
+(1
+<Structure of Presentation>
+
+	Slide1 | research question / not voer than 5 lines
+	title: research question
+	content: previous literature's core arguments
+	
+	Slide2 | Understanding; my argue or curiasity
+	title: Understanding ~
+	content: 2line
+	arguments: Do~ ?
+	
+	Slide3 | Conceptualizing
+	title: What is gendered Policing
+	content: how from previous works to my work and expections
+			 Hypotheses
+	One sentence clarification
+	
+	Slide4 | Dataset and methods
+	Content
+		Essential data source
+		Varibles
+			DV
+			IV
+			Ct
+	
+	Slide5-7 |
+	title: Hypothesis1-3
+	content: Plot
+	note: Tests: (1) Mean differences, (2) Regression (using specific options) (3) se type
+
+	Slide6 |
+	title: Key Takeaways
+	content: One line of summary + contribution w/ two or three implications.

@@ -1,0 +1,200 @@
+\documentclass[12pt]{article}
+\usepackage{setspace}
+\doublespacing
+\usepackage{geometry}
+\usepackage{titling}
+\usepackage{blindtext}
+\geometry{margin=1in}
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage[fleqn]{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage[affil-it]{authblk}
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{lettrine}
+\usepackage{longtable}
+\usepackage[utf8]{inputenc}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage[toc,title,page]{appendix}
+\usepackage{longtable}
+\usepackage{afterpage}
+\makeatletter % <=======================================================
+\renewcommand{\@makefntext}[1]{%
+	\setlength{\parindent}{0pt}%
+	\begin{list}{}{\setlength{\labelwidth}{6mm}% 1.5em <==================
+			\setlength{\leftmargin}{\labelwidth}%
+			\setlength{\labelsep}{3pt}%
+			\setlength{\itemsep}{0pt}%
+			\setlength{\parsep}{0pt}%
+			\setlength{\topsep}{0pt}%
+			\footnotesize}%
+		\item[\@thefnmark\hfil]#1% @makefnmark
+	\end{list}%
+}
+\makeatother % <========================================================
+
+
+\title{Supporting Information for: \\ Why Do Authoritarian Regimes Provide Welfare?}
+\author{Sanghoon Park}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\newpage
+\section{Full List of Authoritarian Countries in My Data}
+Figure \ref{fig:figure6} illustrates the structure of my data is unbalanced time-series cross sectional with  163 authoritarian countries from the years 1816 to 2011. 
+\begin{figure}[!htbt]
+	\centering
+	\includegraphics[width=1\textwidth]{"../3. Datasets_Codebooks/Figures/Appendix1"}
+	\caption{Full List of Authoritarian Countries in My Data}
+	\label{fig:figure6}
+\end{figure}
+
+
+\section{Welfare State Programs and Party Institutionalization Index}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"../3. Datasets_Codebooks/Figures/Plot1"}
+	\caption{Encompassingness and Universal Programs by Platform Quantile}
+	\label{fig:figure1}
+\end{figure}
+
+Figure \ref{fig:figure1} shows the distribution of welfare emcompassingness and universalism by the quantiles of distinct party variable. According to the panels of figure, it reveals that the high levels of distinct party index is associated with broader, or universal welfare programs.\par
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"../3. Datasets_Codebooks/Figures/Plot2"}
+	\caption{Encompassingness and Universal Programs by Constituency Linkage Quantile}
+	\label{fig:figure2}
+\end{figure}
+
+Figure \ref{fig:figure2} also shows the distribution of welfare programs by different variable of the constituency linkage. Panels follow similar trend that the more party elites are linked to their constituent, the more universal or broader welfare programs are.\par
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"../3. Datasets_Codebooks/Figures/Plot3"}
+	\caption{Encompassingness and Universal Programs by Party Organization Quantile}
+	\label{fig:figure3}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"../3. Datasets_Codebooks/Figures/Plot4"}
+	\caption{Encompassingness and Universal Programs by Party Branches Quantile}
+	\label{fig:figure4}
+\end{figure}
+
+\begin{figure}[!ht]
+	\centering
+	\includegraphics[width=0.9\textwidth]{"../3. Datasets_Codebooks/Figures/Plot4"}
+	\caption{Encompassingness and Universal Programs by Legislative Party Cohesion Quantile}
+	\label{fig:figure5}
+\end{figure}
+
+
+The \textit{Type of Goods} is codded 0 as the most clientalistic. Thus, the Figure \ref{fig:figure3} negative tendency between the levels clientalism and welfare program provisions like the party platform and constituency linkage.
+
+\section{Party Institutionalization Index and Regime support groups}
+\begin{figure}[!htbt]
+	\centering
+	\includegraphics[width=0.7\linewidth]{"../3. Datasets_Codebooks/Figures/Appendix2"}
+	\caption{Party Institutionalization Index and Regime support groups}
+	\label{fig:appendix2}
+\end{figure}
+
+\newpage
+\small
+\setlength\tabcolsep{2pt}
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+
+\afterpage{
+	\begin{longtable}in{longtable}}[!htbt]{l*{6}{c}}
+		\caption{argarian$\times$pi on Welfare Programs}	\label{tab:table3}\\
+		\hline\hline
+		&\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+		&      \textit{Old-pension}         &      \textit{Mater}         &     \textit{Sick}         &     \textit{Working}         &    \textit{Unempl.}        &     \textit{Family}         \\
+		\endfirsthead
+		\hline
+		&\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+		&      \textit{Old-pension}         &      \textit{Mater}         &     \textit{Sick}         &     \textit{Working}         &    \textit{Unempl.}        &     \textit{Family}         \\
+		\endhead
+		\hline \multicolumn{7}{l}{\textit{Continued on next page}} \\
+		\endfoot
+		\hline \hline
+		\endlastfoot
+		1.dum\_1     &        0.85\sym{*}  &        0.12         &       0.094         &        0.16         &       -0.49\sym{***}&       -0.57\sym{***}\\
+		&      (0.39)         &      (0.12)         &      (0.19)         &     (0.099)         &     (0.096)         &      (0.12)         \\
+		[1em]
+		lag3v2psorgs&       -0.15\sym{**} &       0.038         &       -0.13\sym{***}&       0.079\sym{**} &      -0.097\sym{***}&      -0.087\sym{*}  \\
+		&     (0.047)         &     (0.033)         &     (0.039)         &     (0.030)         &     (0.026)         &     (0.034)         \\
+		[1em]
+		lag3v2psprbrch&        0.20\sym{***}&       0.043         &        0.30\sym{***}&      -0.033         &        0.14\sym{***}&       0.031         \\
+		&     (0.048)         &     (0.035)         &     (0.045)         &     (0.026)         &     (0.032)         &     (0.036)         \\
+		[1em]
+		lag3v2psplats&       0.061         &      -0.068\sym{**} &      -0.057\sym{*}  &     -0.0037         &       0.072\sym{**} &       0.087\sym{**} \\
+		&     (0.036)         &     (0.025)         &     (0.028)         &     (0.033)         &     (0.024)         &     (0.029)         \\
+		[1em]
+		lag3v2psprlnks&      -0.081\sym{*}  &       0.083\sym{***}&        0.11\sym{***}&       -0.12\sym{***}&       0.067\sym{**} &        0.24\sym{***}\\
+		&     (0.032)         &     (0.024)         &     (0.021)         &     (0.030)         &     (0.023)         &     (0.032)         \\
+		[1em]
+		lag3v2pscohesv&        0.14\sym{***}&       0.066\sym{*}  &       0.025         &       -0.11\sym{***}&      -0.026         &       -0.13\sym{***}\\
+		&     (0.035)         &     (0.033)         &     (0.030)         &     (0.029)         &     (0.017)         &     (0.025)         \\
+		[1em]
+		lag3v2dlencmps&       0.079\sym{*}  &       0.077\sym{***}&        0.12\sym{***}&       0.082\sym{***}&      -0.061\sym{***}&        0.11\sym{***}\\
+		&     (0.032)         &     (0.023)         &     (0.026)         &     (0.024)         &     (0.017)         &     (0.030)         \\
+		[1em]
+		1.dum$\times$ c.lag3v2psorgs&       -0.79\sym{***}&       -0.24         &       -0.18         &       -0.18         &      -0.086         &        0.10         \\
+		&      (0.23)         &      (0.18)         &      (0.19)         &      (0.12)         &     (0.078)         &     (0.093)         \\
+		[1em]
+		1.dum$\times$c.lag3v2psprbrch&        0.96\sym{***}&        0.12         &      -0.011         &        0.27\sym{***}&        0.35\sym{***}&       -0.14         \\
+		&      (0.15)         &      (0.18)         &      (0.31)         &     (0.072)         &     (0.064)         &      (0.11)         \\
+		[1em]
+		1.dum$\times$c.lag3v2psplats&        1.14\sym{***}&      -0.075         &        0.14         &       -0.25\sym{*}  &        0.68\sym{***}&        0.47\sym{***}\\
+		&      (0.19)         &      (0.33)         &      (0.24)         &      (0.10)         &     (0.088)         &      (0.11)         \\
+		[1em]
+		1.dum$\times$c.lag3v2psprlnks&        0.13         &        0.23         &       0.032         &        0.20         &       -0.39\sym{***}&       -0.58\sym{***}\\
+		&      (0.39)         &      (0.22)         &      (0.11)         &      (0.13)         &     (0.090)         &      (0.11)         \\
+		[1em]
+		1.dum$\times$c.lag3v2pscohesv&       -0.91\sym{***}&      -0.052         &       0.063         &      -0.021         &       -0.38\sym{***}&       0.018         \\
+		&      (0.12)         &      (0.14)         &      (0.14)         &     (0.060)         &     (0.051)         &     (0.068)         \\
+		[1em]
+		1.dum$\times$c.lag3v2dlencmps&       -0.26\sym{*}  &       -0.18\sym{*}  &       -0.18\sym{*}  &       -0.11\sym{**} &       -0.40\sym{***}&       -0.39\sym{***}\\
+		&      (0.13)         &     (0.086)         &     (0.084)         &     (0.039)         &     (0.041)         &     (0.059)         \\
+		[1em]
+		lag3gdppc   &        0.12         &       -0.35\sym{***}&       0.035         &       -0.30\sym{***}&        0.15\sym{***}&       -0.18\sym{**} \\
+		&     (0.089)         &     (0.051)         &     (0.065)         &     (0.055)         &     (0.033)         &     (0.063)         \\
+		[1em]
+		lag3resdep  &     -0.0065\sym{**} &    -0.00066         &      0.0074\sym{***}&      0.0063\sym{***}&     -0.0061\sym{***}&      0.0053\sym{***}\\
+		&    (0.0022)         &    (0.0018)         &    (0.0017)         &    (0.0016)         &   (0.00096)         &   (0.00099)         \\
+		[1em]
+		lag3urban   &       0.045\sym{***}&       0.015\sym{***}&       0.013\sym{***}&     0.00095         &      0.0100\sym{***}&      0.0082\sym{***}\\
+		&    (0.0047)         &    (0.0025)         &    (0.0024)         &    (0.0032)         &    (0.0018)         &    (0.0021)         \\
+		[1em]
+		lag3pop14   &      -0.030\sym{***}&      -0.072\sym{***}&      -0.019\sym{**} &      -0.032\sym{***}&      0.0067         &     -0.0024         \\
+		&    (0.0076)         &    (0.0068)         &    (0.0062)         &    (0.0058)         &    (0.0042)         &    (0.0063)         \\
+		[1em]
+		lag3pop65   &       -0.20\sym{***}&       0.016         &       0.057\sym{*}  &       0.049\sym{*}  &        0.18\sym{***}&        0.15\sym{***}\\
+		&     (0.020)         &     (0.020)         &     (0.023)         &     (0.019)         &     (0.018)         &     (0.020)         \\
+		[1em]
+		Country Dummies &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+		[1em]
+		Year Dummies &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+		\hline
+		\(N\)       &        4250         &        4030         &        4186         &        3778         &        4433         &        4331         \\
+		
+	\end{longtable}
+}
+
+\end{document}

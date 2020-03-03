@@ -1,0 +1,60 @@
+This is BibTeX, Version 0.99d (TeX Live 2018/W32TeX)
+Capacity: max_strings=100000, hash_size=100000, hash_prime=85009
+The top-level auxiliary file: 2019_SPSA_Park.aux
+The style file: apsr.bst
+Database file #1: 19AuthWelfare.bib
+Repeated entry---line 937 of file 19AuthWelfare.bib
+ : @article{Levitsky2002
+ :                      ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1545 of file 19AuthWelfare.bib
+ : @article{Briggs1961
+ :                    ,
+I'm skipping whatever remains of this entry
+Repeated entry---line 1775 of file 19AuthWelfare.bib
+ : @article{Huber1993
+ :                   ,
+I'm skipping whatever remains of this entry
+Warning--there's a number but no volume in Rasmussen2016
+You've used 28 entries,
+            2874 wiz_defined-function locations,
+            843 strings with 9810 characters,
+and the built_in function-call counts, 153732 in all, are:
+= -- 25524
+> -- 1768
+< -- 0
++ -- 12290
+- -- 622
+* -- 13497
+:= -- 30224
+add.period$ -- 112
+call.type$ -- 28
+change.case$ -- 365
+chr.to.int$ -- 28
+cite$ -- 29
+duplicate$ -- 422
+empty$ -- 959
+format.name$ -- 655
+if$ -- 27625
+int.to.chr$ -- 5
+int.to.str$ -- 0
+missing$ -- 30
+newline$ -- 119
+num.names$ -- 313
+pop$ -- 100
+preamble$ -- 1
+purify$ -- 420
+quote$ -- 0
+skip$ -- 359
+stack$ -- 0
+substring$ -- 36638
+swap$ -- 53
+text.length$ -- 392
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 106
+warning$ -- 1
+while$ -- 663
+width$ -- 0
+write$ -- 384
+(There were 3 error messages)
