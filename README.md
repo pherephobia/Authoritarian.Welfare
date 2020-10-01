@@ -7,3 +7,6 @@
 - Slides are also posted here: [slides](https://github.com/pherephobia/Authoritarian.Welfare/blob/master/Documents/3_Slides/2020_IRCP_Park_PaperCompetition.pdf).
 - Feel free to send me a message by [email](sp23@email.sc.edu) via [webpage](shpark.netlify.app) or [create an issue](https://github.com/pherephobia/Authoritarian.Welfare/issues) on here. 
 <br />
+
+## Acknowledgment
+It is a preliminary draft. Please do not cite or distribute without permission of the author.
