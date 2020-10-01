@@ -1,6 +1,6 @@
 ## Authoritarian.Welfare <img src="autocrats.png" width="180" height= "200" align="right" /> <br />  
 - This is the repository for the research titled "Why do authoritarian regimes provide welfare program?"
-- This repository provides [code]("https://github.com/pherephobia/Authoritarian.Welfare/Command Data/Authoritarian.Welfare.R") for replication.
+- This repository provides [code]("https://github.com/pherephobia/Authoritarian.Welfare/Command_data/Authoritarian.Welfare.R") for replication.
 - The Working draft ([pdf](https://github.com/pherephobia/Authoritarian.Welfare/Documents/2_Manuscript/Park_2020_Manuscript.pdf)) has been presented at:
   - the MPSA Annual Meeting, April, 2020.
   - the SPSA Annual Meeting, January, 2020.
