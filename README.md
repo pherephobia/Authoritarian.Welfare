@@ -1,4 +1,4 @@
-## Authoritarian.Welfare <img src="autocrats.png" width="180" height= "180" align="right" /> <br />  
+## Authoritarian.Welfare <img src="autocrats.png" width="180" height= "210" align="right" /> <br />  
 - This is the repository for the research titled "Why do authoritarian regimes provide welfare program?"
 - This repository provides [code](https://github.com/pherehobia/Authoritarian.Welfare/Command Data/Authoritarian.Welfare.R) for replication.
 - The Working draft ([pdf](https://github.com/pherehobia/Authoritarian.Welfare/Documents/2_Manuscript/Park_2020_Manuscript.pdf)) has been presented at:
