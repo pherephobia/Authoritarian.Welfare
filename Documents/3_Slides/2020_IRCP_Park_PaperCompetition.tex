@@ -1,0 +1,285 @@
+\documentclass{Bredelebeamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{scrextend}
+\usepackage{booktabs}
+\changefontsizes{11pt}
+\usepackage{natbib}
+\usepackage{adjustbox}
+\usepackage{graphicx}
+\hyphenation{thatshouldnot}
+\bibpunct{(}{)}{;}{a}{}{,}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{Why Do Authoritarian Regimes Provide Welfare Programs?}
+% Title
+
+% Optional subtitle
+\author{Sanghoon Park \inst{1}}
+% The \ inst {...} command displays the speaker's affiliation.
+% If there are several speakers: Marcel Dupont \ inst {1}, Roger Durand \ inst {2}
+% Just add another institute to the model below.
+\institute[University of South Carolina]
+{
+  \inst{1}%
+  University of South Carolina\\Department of Political Science}
+\date{\today}
+% Optional. The date, usually the day of the conference
+\subject{World Congress Presentation (6/26/2019)}
+% It's used in PDF metadata
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\section{Research Question}
+\begin{frame}[t]{Research Question}
+	\begin{itemize}
+		\item Existing studies of welfare assume fully democratic regimes.\pause
+		\begin{itemize}
+			\item Compensations %\citep{Boix2001a,Adsera2002} 
+			\item Median voters %\citep{Meltzer1981,Iversen2006} 
+			\item Power resources %\citep{Bradley2003,Korpi2006,Lupu2011} 
+		\end{itemize}\pause
+		\item How can we explain the following questions?
+		\begin{itemize}
+			\item Why do authoritarian regimes provide welfare?
+			\item Are there variations of authoritarian welfare states?
+		\end{itemize}
+	\end{itemize}	
+\end{frame}
+
+\section{Theory}
+
+\begin{frame}{Welfare Regimes in Autocracies}
+\begin{itemize}
+	\item The structure of class coalitions presses govt. toward specific types of welfare states \citep{Gosta1990}.
+	\begin{itemize}
+		\item For example, red-green alliance of Sweden $\rightarrow$ universal %welfare programs.
+	\end{itemize}
+	\item Leaders maintain coalitions of supporters by public, private goods \citep{BuenodeMesquita2003}.
+\end{itemize}
+\end{frame}
+\begin{frame}{Welfare Regimes in Autocracies}
+\begin{itemize}
+	\item Autocracies have different coalitions \citep{Gandhi2009,Levitsky2010}.
+	\item Autocrats also have incentives to provide public goods \citep{Olson1993a,Wintrobe1998}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Welfare Regimes in Autocracies}
+\centering The problem is: \pause \textbf{\textit{who is the target?}} %autocrats should care}}. \centering 
+\end{frame}
+
+\begin{frame}{Classes}
+In authoritarian regimes,
+	\begin{itemize}
+		\item Welfare = Co-optation
+		\item Extent of welfare depends on class. %the regime should co-opt.
+	\end{itemize}
+Assumption: individuals in similar strata have converging preferences over social policies.
+	\begin{itemize}
+		\item Income-based: \textbf{middle class} and \textbf{working class}
+		\item Institutional-based: \textbf{party elite} and \textbf{military}
+		\end{itemize}
+\end{frame}
+
+\begin{frame}{Classes}
+\begin{enumerate}
+	\item \textbf{Urban middle} and \textbf{urban working} classes
+	\begin{itemize}
+		\item Urban classes $\rightarrow$ Higher leverages \citep{Dahlum2019}.
+		\item Different social life $\rightarrow$ Different welfare demands
+	\end{itemize}
+	\item \textbf{Party elite} and \textbf{military}
+	\begin{itemize}
+		\item Specific institutions create class of elites with distinct interests, incentives.
+	\end{itemize}
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{Class Coalitions}
+\begin{itemize}
+	\item Different classes $\rightarrow$ Different welfare demands.
+	\begin{itemize}
+		\item Democratization literature emphasizes threats of middle class.
+		\item Working class prefers more extensive welfare than middle.
+		\begin{itemize}
+			\item Working class more sensitive to change in distribution of wealth, welfare.% since it depends primarily on the labor force.
+		\end{itemize}
+	\end{itemize}\pause
+	\item $\text{\textit{H}}_1$: Urban working class has greater influence on universal welfare programs than middle class.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Party Institutionalization}
+\begin{itemize}
+	\item Recent works focus on capacity of parties to provide public goods.
+	\begin{itemize}
+		\item Autocrats with institutionalized parties $\rightarrow$ universal welfare programs \citep{Rasmussen2019}.
+		\item Institutionalized party helps distribute resources.
+	\end{itemize}\pause
+	\item $\text{\textit{H}}_2$: Higher levels of party institutionalization increase welfare programs universality.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Class Coalition \& Party Institutionalization}
+	\begin{itemize}
+		\item Institutionalized parties can aggregate the demands of working classes in a more organized and efficient way.
+		\item Autocrats can handle the class coalition using institutionalized party.\pause
+		\item $\text{\textit{H}}_3$: Influence of urban working class on universal welfare is greater when party institutionalization increases.
+	\end{itemize}
+\end{frame}
+
+\section{Data and Empirical Specification}
+\begin{frame}{Sample Selection}
+Authoritarian Regimes: \centering 
+\begin{figure}[!htbt]
+	\centering
+	\includegraphics[width=0.85\linewidth]{"../3. Datasets_Codebooks/Figures/Plot1"}
+	\caption{The distribution of Democracies and Autocracies}
+	\label{fig:plot1}
+\end{figure}
+\end{frame}	
+
+\begin{frame}{Sample Selection}
+After the Russian Revolution of 1917: \centering 
+\begin{figure}[!htbt]
+	\centering
+	\includegraphics[width=0.9\linewidth]{"../3. Datasets_Codebooks/Figures/Plot3"}
+	\caption{Time trends of the numbers of states by classes}
+	\label{fig:plot2}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Dataset and methods}
+\begin{itemize}
+	\item Coverage: 95 authoritarian states from 1917-2000 (unbalanced)
+	\item Sources of data
+	\begin{itemize}
+		\item Social Policies around the World (SPaW) data set
+		\item Variety of Democracies (V-Dem) data set
+	\end{itemize}
+	\item Variable
+	\begin{itemize}
+		\item DV: Welfare programs \small{(social coverage)}
+		\item EV: Class coalitions \small{(urban working, urban middle, party elites, and military)}
+		\item CV: Logged GDP per capita (V-Dem), logged of population, and resource dependence \citep{Miller2015}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dataset and methods}
+\begin{figure}[!htbt]
+	\centering
+	\includegraphics[width=1\linewidth]{"../3. Datasets_Codebooks/Figures/Plot2"}
+	\caption{The distribution of universal indices by classes in Autocracies}
+	\label{fig:plot3}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Empirical Analysis}
+\begin{figure}[!htbt]
+	\centering
+	\includegraphics[width=1\linewidth]{"PRplot1"}
+	\caption{Class coalitions, Party Institutionalization, and Welfare Universalism}
+	\label{fig:plot4}
+\end{figure}
+\end{frame}
+
+%begin{frame}{Empirical Analysis}
+%\begin{figure}[!htbt]
+%	\centering
+%	\includegraphics[width=1\linewidth]{"../3. Datasets_Codebooks/Figures/Plot4"}
+%	\caption{Disaggregated Party Institutionalization and Welfare Universalism (95\% CI)}
+%	\label{fig:plot5}
+%\end{figure}
+%\end{frame}
+
+\begin{frame}{Empirical Analysis}
+\begin{figure}[!htbt]
+	\centering
+	\includegraphics[width=1\linewidth]{"../3. Datasets_Codebooks/Figures/Plot5"}
+	\caption{Predicted Universal Welfare of No-urban and urban Working Class by Party\\Institutionalization (95\% CI)}
+	\label{fig:plot6}
+\end{figure}
+\end{frame}
+		
+\section{Conclusion}
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Similar paths: Class coalition $\rightarrow$ Welfare provision \pause
+	\end{itemize}
+	\centering
+	\includegraphics[width=1\linewidth]{"P/PR 1"}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+		\item Similar paths: Class coalition $\rightarrow$ Welfare provision
+	\end{itemize}
+	\centering
+	\includegraphics[width=1\linewidth]{"P/PR 2"}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+	\item However, different mechanisms: Co-optation $\rightarrow$ Welfare \pause
+	\end{itemize}
+	\centering
+	\includegraphics[width=1\linewidth]{"P/PR 3"}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+	\item However, the underlying mechanisms are different (participation/cooptation).
+	\end{itemize}
+	\centering
+	\includegraphics[width=1\linewidth]{"P/PR 4"}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+	\item However, the underlying mechanisms are different (participation/cooptation).
+	\end{itemize}
+	\centering
+	\includegraphics[width=1\linewidth]{"P/PR 5"}
+\end{frame}
+
+\begin{frame}{Conclusion}
+	\begin{itemize}
+	\item However, the underlying mechanisms are different (participation/cooptation).
+	\end{itemize}
+	\centering
+	\includegraphics[width=1\linewidth]{"P/PR 6"}
+\end{frame}
+
+\begin{frame}{Implication}
+	\begin{enumerate}
+		\item In autocracies, class differences exist.\pause
+		\begin{itemize}
+			\item Urban working class is greater than urban middle class in universal welfare
+			\item Class coalition matters in autocracies\pause
+		\end{itemize}
+		\item The relationship is affected by party institutionalization but still holds.\pause
+		\begin{itemize}
+			\item Institutionalized parties matter (consistent with recent works).\pause
+		\end{itemize}
+		\item Effect of coalitions are mediated by institutionalized parties.
+	\end{enumerate}
+\end{frame}
+
+\section{Appendix}
+\begin{frame}{Descriptive Statistics}
+\input{Appendix2_description.tex}
+\end{frame}
+
+\begin{frame}<beamer:0>
+	\bibliographystyle{apsr}
+	\bibliography{19AuthWelfare.bib}
+\end{frame}
+\end{document}

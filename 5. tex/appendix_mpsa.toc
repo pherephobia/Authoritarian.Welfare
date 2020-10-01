@@ -1,3 +1,0 @@
-\contentsline {section}{\numberline {1}Full List of Authoritarian Countries in My Data}{2}{section.1}
-\contentsline {section}{\numberline {2}Welfare State Programs and Party Institutionalization Index}{3}{section.2}
-\contentsline {section}{\numberline {3}Party Institutionalization Index and Regime support groups}{3}{section.3}

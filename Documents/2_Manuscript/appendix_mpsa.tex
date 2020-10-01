@@ -1,0 +1,269 @@
+\documentclass[12pt]{article}
+\usepackage{setspace}
+\doublespacing
+\usepackage{geometry}
+\usepackage{titling}
+\usepackage{blindtext}
+\geometry{margin=1in}
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{mathptmx} % assumes new font selection scheme installed
+\usepackage{times} % assumes new font selection scheme installed
+\usepackage[fleqn]{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage[affil-it]{authblk}
+\usepackage{natbib}
+\bibpunct{(}{)}{;}{a}{}{,}
+\usepackage{hyperref}
+\usepackage{bookmark}
+\hypersetup{
+	colorlinks   = true, %Colours links instead of ugly boxes
+	urlcolor     = blue, %Colour for external hyperlinks
+	linkcolor    = blue, %Colour of internal links
+	citecolor   = blue %Colour of citations,
+}
+\usepackage{xcolor}
+\usepackage{lettrine}
+\usepackage{longtable}
+\usepackage{chngcntr}
+\usepackage[utf8]{inputenc}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage[toc,title,page]{appendix}
+\usepackage{longtable}
+\usepackage{afterpage}
+\makeatletter % <=======================================================
+\renewcommand{\@makefntext}[1]{%
+	\setlength{\parindent}{0pt}%
+	\begin{list}{}{\setlength{\labelwidth}{6mm}% 1.5em <==================
+			\setlength{\leftmargin}{\labelwidth}%
+			\setlength{\labelsep}{3pt}%
+			\setlength{\itemsep}{0pt}%
+			\setlength{\parsep}{0pt}%
+			\setlength{\topsep}{0pt}%
+			\footnotesize}%
+		\item[\@thefnmark\hfil]#1% @makefnmark
+	\end{list}%
+}
+
+
+\newcommand{\hbAppendixPrefix}{A}
+%
+\renewcommand{\thefigure}{\hbAppendixPrefix\arabic{figure}}
+\setcounter{figure}{0}
+\renewcommand{\thetable}{\hbAppendixPrefix\arabic{table}} 
+\setcounter{table}{0}
+\renewcommand{\theequation}{\hbAppendixPrefix\arabic{equation}} 
+\setcounter{equation}{0}
+\makeatother % <========================================================
+
+
+\title{Supporting Information for: \\ Why Do Authoritarian Regimes Provide Welfare?}
+\author{Sanghoon Park}
+\date{\today}
+
+
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\newpage
+	
+	\section{Full List of Authoritarian Countries in the Sample}
+	Figure \ref{fig:figure6} illustrates the structure of the sample, which is an unbalanced time-series cross-sectional with 95 authoritarian countries from the years 1917 to 2000. 
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=0.95\textwidth]{"../3. Datasets_Codebooks/Figures/Appendix/Appendix1_sample"}
+		\caption{Full List of Authoritarian Countries in the Sample}
+		\label{fig:figure6}
+	\end{figure}
+	The cases in which authoritarian regimes build a class coalition with the urban working class and urban middle class comprise 7.2\% of authoritarian country-years in the data (4.9\% and 2.3\% respectively). The party elite and the military class coalitions have 56.8\% of authoritarian country-years (25.9\% and 30.9\%). The category of ``Others'' covers the other class coalitions (36\%) which do not include in the paper; the ethnic/racial/religious groups, agrarian/local elites, business elites/civil servants, urban Working, rural Working, urban middle, rural middle, the aristocracy, and a foreign government, or colonial power. 
+	
+	\section{Descriptive Statistics}
+	
+	Table \ref{tab:appendesc} presents descriptive statistics for my analysis. All independent and control variables are lagged in three years. The population and GDP per capita take logged values. WWI, WWII, and Cold War variables indicate the period of each event as binary variables. 
+	
+	\input{tables/Appendix2_description.tex}
+	
+	\section{Alternative Dependent Variable}
+	\subsection{The Distribution of Alternative Universalism index by Class Coalitions in Autocracies}
+	Alternatively, I use a variable to measure the level of welfare universalism from the V-dem data set. The U.I. of V-dem relies on expert coding that asks ``how many welfare programs are means-tested and how many benefits all (or virtually all) members of the polity.'' The value of 0 means there are no, or minimal, welfare state policies. The maximum value of 5 states that almost all welfare state policies are universal. It is measured as ordinal and converted to the interval. Although this \textit{Universal Programs} cannot tell the variations of different welfare programs, it is relatively advantageous to examine compared to other measurements, such as a total sum of social expenditure. The U.I. of V-dem shows the compositions of welfare programs that a state has.
+	
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=0.95\textwidth]{"../3. Datasets_Codebooks/Figures/Appendix/Appendix5"}
+		\caption{The Distribution of Alternative Universalism index by Class Coalitions in Autocracies}
+		\label{fig:figure9}
+	\end{figure}
+	
+	\begin{itemize}
+		\item In the left panel with essential class coalitions with the alternative dependent variable, the urban working class, shows the greatest ratio of universal welfare program compositions. The urban middle, party elites, and the military follow. It means that the way to deliver welfare, the urban working class coalitions are universal compared to other class coalitions.
+		\item In the right panel with other class coalitions excluded in the analysis, they show relatively low levels of universal welfare program compositions compared to the essential class coalitions.
+		\item The rural working class is excluded due to the lack of cases to show distribution.
+	\end{itemize}
+	
+	\subsection{The Results with Alternative Dependent Variable}
+	
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=0.95\textwidth]{"../3. Datasets_Codebooks/Figures/Appendix/Appendix6"}
+		\caption{Coefficient Plots with Alternative Dependent Variables:
+			Universal Index of V-Dem, Covariates are the same as main result.
+			Coefficients and 95\% confidence intervals are presented.}
+		\label{fig:figure10}
+	\end{figure}
+	
+	In Figure \ref{fig:figure10}, I utilize the \textit{Universal Index} of \textit{V-Dem} as dependent variable. By the operationalized definition, the variable tells how much the delivery of welfare programs lean toward cash-benefits or universalism. If the \textit{Universal Index} of \textit{V-Dem} is greater than 0, then it means the regime has more universal welfare programs for everyone than cash-benefit programs targeting a particular group of people. In Model 4, all classes are not statistically significant compared to the urban middle class. It suggests that the ways to deliver welfare across class coalitions are not distinctive to each other.
+	
+	\section{Alternative Explanatory Variables}
+	\subsection{Class Coalitions}
+	\subsubsection{The numbers of class coalitions across the time under democracies}
+	Figure \ref{fig:figure7} indicates the numbers of class coalitions across the time in democracies. In addition to the key class coalitions that I include in the analysis for the authoritarian regimes, business elites and civil servants emerge after 1980. Also, unlike in authoritarian regimes, the urban middle class is relatively important that the military.
+	
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=0.8\textwidth]{"../3. Datasets_Codebooks/Figures/Appendix/Appendix3_trenddem"}
+		\caption{The numbers of class coalitions across the time in democracies}
+		\label{fig:figure7}
+	\end{figure}
+	
+	\subsubsection{The Distribution of Universalism indices by Class Coalitions in Autocracies: Others}
+	
+	\begin{figure}[!ht]
+		\centering
+		\includegraphics[width=0.95\textwidth]{"../3. Datasets_Codebooks/Figures/Appendix/Appendix4"}
+		\caption{The Distribution of Universalism index by Class Coalitions in Autocracies}
+		\label{fig:figure8}
+	\end{figure}
+	
+	Figure \ref{fig:figure8} is the distribution of the universalism index of the SPaW dataset by class coalitions excluded from the analysis in the original paper. The universalism index measures how many social groups each welfare program covers. The urban middle class shows the highest mean value of \textit{Universal Index}. The other class coalitions are the ethnic/racial/religious groups, agrarian/local elites, business elites/civil servants, rural working-class, rural middle class, the aristocracy, and a foreign government or colonial power.
+	
+	Ethnicity is also considered as a group-based attribute with which one is born. It is closely related to a particular language, racial, tribal, ethnic, caste, or even religious groups \citep[41]{Huber2017}. For example, the ethnic/racial/religious groups can be considered as homogeneous groups as people's ethnicity is easily identifiable and can be used to construct categories of homogeneous individuals \citep{Alesina2005}. 
+	
+	In Western Europe, agriculture was the dominant production structure of society until the industrial revolution between the late 18th and early 19th centuries emerged. The source of the political resources of the elite was based on agriculture. Although the landowners of the peasants and bourgeois expanded over time, the feudal manor lords occupied the land ownership steadily. The feudal lords---the agrarian elite has accumulated surplus labor or surplus products from the peasants or tenant farmers in the form of rents by lending common lands. \citet{Ansell2015a} suggest that the ruling elite in the early stage can be divided into two groups. They call the two groups as the relative economic elites and the autocratic elite \footnote{This study defines the relative economic elites as groups of people who have industrial goods (economic power) without political power.}. Also, \citet{Ansell2015a} considers the autocratic elite as the incumbent elite who gains his resources from its local agricultural section.
+	
+	These other class coalitions are excluded in the primary analysis as it is difficult to specify how their converging interests and incentives are associated with universal welfare programs.
+	
+	\subsection{Party Institutionalization}
+	
+	As the P.I. show statistically significant regardless of the data sources in \citep{Rasmussen2019}, I disaggregate the P.I. into several indicators to explore these dispersed results. The P.I. is consists of five indicators.
+	
+	\begin{itemize}
+		\item Distinct platforms (\textit{v2psplats}): how do many parties among those with representation in the legislature have publicly available, and distinct, party platforms?
+		\item Organization (\textit{v2psorgs}): how do many parties have permanent organizations?
+		\item Constituency linkages (\textit{v2psprlnks}): what are the most common form of linkage between parties and their constituents across all major parties?
+		\item Cohesive membership (\textit{v2pscohesv}): is it normal for members of the legislature to vote with other members of their party on important bills?
+		\item Local branch (\textit{v2psprbrch}): how many parties have permanent local party branches?
+	\end{itemize}
+	
+	Institutionalized parties under authoritarian rules may not be identical to those under democracies. Figure \ref{fig:plot4} shows the association between disaggregated P.I. and \textit{Universal Indies} of \textit{SPaW} and \textit{V-Dem} under authoritarian regimes when I control class coalitions and other covariates. Unlike the previous work of \citet{Rasmussen2019}, the indicators of P.I. show different effects on different indices of universal welfare programs.
+	
+	The upper panel of Figure \ref{fig:plot4} shows the relationship between disaggregated party institutionalization and SPaW universal welfare programs. In terms of universal welfare program coverages, the cohesive membership and platform indicators are statistically significant. As the party members have cohesive membership, it is more likely to provide universal welfare programs. Also, as a regime has more distinctive and available parties as platforms, it is less likely to cover broader social groups.
+	
+	The lower panel of Figure \ref{fig:plot4} is about the relationship between disaggregated party institutionalization and V-Dem universal welfare programs. Three indicators of P.I. show statistical significance---\textit{Branch, Organization}, and \textit{Cohesion}. The \textit{Linkage, Platform} indicators are insignificant. Also, when the indicators are all included in the model, the organization indicator loses the statistical significance.
+	
+	Figure \ref{fig:plot4} implies that authoritarian regimes cover and deliver welfare using specific aspects of the institutionalized party. Unlike previous literature on the institutionalized party, not all aspects of the party enhance universal welfare programs.
+	
+	\begin{figure}[!htbt]
+		\centering
+		\includegraphics[width=0.9\linewidth]{"../3. Datasets_Codebooks/Figures/Appendix/Appendix7"}
+		\caption{Disaggregated Party Institutionalizations and Welfare Universalism Indices (95\% C.I.)}
+		\label{fig:plot4}
+	\end{figure}
+	
+	%\section{Party Institutionalization Index and Regime support groups}
+	%\begin{figure}[!htbt]
+	%    \centering
+	%    \includegraphics[width=0.7\linewidth]{"../3. Datasets_Codebooks/Figures/Appendix2"}
+	%    \caption{Party Institutionalization Index and Regime support groups}
+	%    \label{fig:appendix2}
+	%\end{figure}
+	
+	%\newpage
+	%\small
+	%\setlength\tabcolsep{2pt}
+	%\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+	
+	%\afterpage{
+	%    \begin{longtable}in{longtable}}[!htbt]{l*{6}{c}}
+	%        \caption{argarian$\times$pi on Welfare Programs}    \label{tab:table3}\\
+	%        \hline\hline
+	%        &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         %&\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+	%        &      \textit{Old-pension}         &      \textit{Mater}         &     \textit{Sick}         &     \textit{Working}         &    \textit{Unempl.}        &     \textit{Family}         \\
+	%        \endfirsthead
+	%        \hline
+	%        &\multicolumn{1}{c}{(1)}         &\multicolumn{1}{c}{(2)}         &\multicolumn{1}{c}{(3)}         &\multicolumn{1}{c}{(4)}         &\multicolumn{1}{c}{(5)}         &\multicolumn{1}{c}{(6)}         \\
+	%        &      \textit{Old-pension}         &      \textit{Mater}         &     \textit{Sick}         &     \textit{Working}         &    \textit{Unempl.}        &     \textit{Family}         \\
+	%        \endhead
+	%        \hline \multicolumn{7}{l}{\textit{Continued on next page}} \\
+	%        \endfoot
+	%        \hline \hline
+	%        \endlastfoot
+	%        1.dum\_1     &        0.85\sym{*}  &        0.12         &       0.094         &        0.16         &       -0.49\sym{***}&       -0.57\sym{***}\\
+	%        &      (0.39)         &      (0.12)         &      (0.19)         &     (0.099)         &     (0.096)         &      (0.12)         \\
+	%        [1em]
+	%        lag3v2psorgs&       -0.15\sym{**} &       0.038         &       -0.13\sym{***}&       0.079\sym{**} &      -0.097\sym{***}&      -0.087\sym{*}  \\
+	%        &     (0.047)         &     (0.033)         &     (0.039)         &     (0.030)         &     (0.026)         &     (0.034)         \\
+	%        [1em]
+	%        lag3v2psprbrch&        0.20\sym{***}&       0.043         &        0.30\sym{***}&      -0.033         &        0.14\sym{***}&       0.031         \\
+	%        &     (0.048)         &     (0.035)         &     (0.045)         &     (0.026)         &     (0.032)         &     (0.036)         \\
+	%        [1em]
+	%        lag3v2psplats&       0.061         &      -0.068\sym{**} &      -0.057\sym{*}  &     -0.0037         &       0.072\sym{**} &       0.087\sym{**} \\
+	%        &     (0.036)         &     (0.025)         &     (0.028)         &     (0.033)         &     (0.024)         &     (0.029)         \\
+	%        [1em]
+	%        lag3v2psprlnks&      -0.081\sym{*}  &       0.083\sym{***}&        0.11\sym{***}&       -0.12\sym{***}&       0.067\sym{**} &        0.24\sym{***}\\
+	%        &     (0.032)         &     (0.024)         &     (0.021)         &     (0.030)         &     (0.023)         &     (0.032)         \\
+	%        [1em]
+	%        lag3v2pscohesv&        0.14\sym{***}&       0.066\sym{*}  &       0.025         &       -0.11\sym{***}&      -0.026         &       -0.13\sym{***}\\
+	%        &     (0.035)         &     (0.033)         &     (0.030)         &     (0.029)         &     (0.017)         &     (0.025)         \\
+	%        [1em]
+	%        lag3v2dlencmps&       0.079\sym{*}  &       0.077\sym{***}&        0.12\sym{***}&       0.082\sym{***}&      -0.061\sym{***}&        0.11\sym{***}\\
+	%        &     (0.032)         &     (0.023)         &     (0.026)         &     (0.024)         &     (0.017)         &     (0.030)         \\
+	%        [1em]
+	%        1.dum$\times$ c.lag3v2psorgs&       -0.79\sym{***}&       -0.24         &       -0.18         &       -0.18         &      -0.086         &        0.10         \\
+	%        &      (0.23)         &      (0.18)         &      (0.19)         &      (0.12)         &     (0.078)         &     (0.093)         \\
+	%        [1em]
+	%        1.dum$\times$c.lag3v2psprbrch&        0.96\sym{***}&        0.12         &      -0.011         &        0.27\sym{***}&        0.35\sym{***}&       -0.14         \\
+	%        &      (0.15)         &      (0.18)         &      (0.31)         &     (0.072)         &     (0.064)         &      (0.11)         \\
+	%        [1em]
+	%        1.dum$\times$c.lag3v2psplats&        1.14\sym{***}&      -0.075         &        0.14         &       -0.25\sym{*}  &        0.68\sym{***}&        0.47\sym{***}\\
+	%        &      (0.19)         &      (0.33)         &      (0.24)         &      (0.10)         &     (0.088)         &      (0.11)         \\
+	%        [1em]
+	%        1.dum$\times$c.lag3v2psprlnks&        0.13         &        0.23         &       0.032         &        0.20         &       -0.39\sym{***}&       -0.58\sym{***}\\
+	%        &      (0.39)         &      (0.22)         &      (0.11)         &      (0.13)         &     (0.090)         &      (0.11)         \\
+	%        [1em]
+	%        1.dum$\times$c.lag3v2pscohesv&       -0.91\sym{***}&      -0.052         &       0.063         &      -0.021         &       -0.38\sym{***}&       0.018         \\
+	%        &      (0.12)         &      (0.14)         &      (0.14)         &     (0.060)         &     (0.051)         &     (0.068)         \\
+	%        [1em]
+	%        1.dum$\times$c.lag3v2dlencmps&       -0.26\sym{*}  &       -0.18\sym{*}  &       -0.18\sym{*}  &       -0.11\sym{**} &       -0.40\sym{***}&       -0.39\sym{***}\\
+	%        &      (0.13)         &     (0.086)         &     (0.084)         &     (0.039)         &     (0.041)         &     (0.059)         \\
+	%        [1em]
+	%        lag3gdppc   &        0.12         &       -0.35\sym{***}&       0.035         &       -0.30\sym{***}&        0.15\sym{***}&       -0.18\sym{**} \\
+	%        &     (0.089)         &     (0.051)         &     (0.065)         &     (0.055)         &     (0.033)         &     (0.063)         \\
+	%        [1em]
+	%        lag3resdep  &     -0.0065\sym{**} &    -0.00066         &      0.0074\sym{***}&      0.0063\sym{***}&     -0.0061\sym{***}&      0.0053\sym{***}\\
+	%        &    (0.0022)         &    (0.0018)         &    (0.0017)         &    (0.0016)         &   (0.00096)         &   (0.00099)         \\
+	%        [1em]
+	%        lag3urban   &       0.045\sym{***}&       0.015\sym{***}&       0.013\sym{***}&     0.00095         &      0.0100\sym{***}&      0.0082\sym{***}\\
+	%        &    (0.0047)         &    (0.0025)         &    (0.0024)         &    (0.0032)         &    (0.0018)         &    (0.0021)         \\
+	%        [1em]
+	%        lag3pop14   &      -0.030\sym{***}&      -0.072\sym{***}&      -0.019\sym{**} &      -0.032\sym{***}&      0.0067         &     -0.0024         \\
+	%        &    (0.0076)         &    (0.0068)         &    (0.0062)         &    (0.0058)         &    (0.0042)         &    (0.0063)         \\
+	%        [1em]
+	%        lag3pop65   &       -0.20\sym{***}&       0.016         &       0.057\sym{*}  &       0.049\sym{*}  &        0.18\sym{***}&        0.15\sym{***}\\
+	%        &     (0.020)         &     (0.020)         &     (0.023)         &     (0.019)         &     (0.018)         &     (0.020)         \\
+	%        [1em]
+	%        Country Dummies &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+	%        [1em]
+	%        Year Dummies &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         &         Yes         \\
+	%        \hline
+	%        \(N\)       &        4250         &        4030         &        4186         &        3778         &        4433         &        4331         \\
+	%        
+	%    \end{longtable}
+	%}
+
+	\bibliographystyle{apsr}
+	\bibliography{19AuthWelfare}
+\end{document}
