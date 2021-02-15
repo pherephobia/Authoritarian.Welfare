@@ -39,7 +39,7 @@ getwd()
 ## Dictatorship dataset & GDP & 
 #############################################################
 
-Vdem <- readRDS("Data/Country_Year_V-Dem_Full+others_R_v9/Country_Year_V-Dem_Full+others_R_v9/V-Dem-CY-Full+Others-v9.rds")
+Vdem <- readRDS("Original_Data/Country_Year_V-Dem_Full+others_R_v9/Country_Year_V-Dem_Full+others_R_v9/V-Dem-CY-Full+Others-v9.rds")
 Vdem.s <- 
   Vdem %>% 
   select(country_name, COWcode, year, e_lexical_index, v2x_polyarchy,
@@ -53,7 +53,7 @@ rm(Vdem)
 #############################################################
 ### Welfare coverage and law
 #############################################################
-SPaW <- pick("SPaW_ver2.dta")
+SPaW <- pick("Original_Data/SPaW_ver2.dta")
 SPaW <- SPaW_ver2
 #############################################################
 ###  and Population
@@ -63,7 +63,7 @@ SPaW <- SPaW_ver2
 ### Resources and Military size
 #############################################################
 Miller <- miller2015
-Miller <- pick("Miller2015.dta")
+Miller <- pick("Original_Data/Miller2015.dta")
 
 Miller <- Miller %>% 
   select(ccode, year, resdep2, urban, cow_milsize)
@@ -86,7 +86,7 @@ mdata <- merge(x = mdata, y=Miller, by.x=c("COWcode", "year"),
                by.y = c("ccode", "year"), all.x = TRUE)
 #mdata <- merge(x = mdata, y=QOG.ctrl, by.x = c("COWcode", "year"),
 #               by.y = c("ccodecow", "year"), all.x = TRUE)
-foreign::write.dta(mdata, "mdata.dta")
+foreign::write.dta(mdata, "Analysis_Data/mdata.dta")
 
 names(mdata)
 
@@ -1031,7 +1031,7 @@ foreign::write.dta(autocracies, "sample.dta")
 ##### Coefplot for Table 1
 #############################################################
 library(ezpickr)
-table1 <- pick("Data/table1.dta")
+table1 <- pick("Analysis_Data/table1.dta")
 library(tidyverse)
 
 table1 <- table1 %>% dplyr::filter(!str_detect(var, ".ccode"))
@@ -1406,7 +1406,7 @@ table5 %>% dplyr::filter(var %in% c("working", "urban_middle", "party")) %>%
 ## Interaction class and pi
 #############################################################
 
-interaction <- pick("intclasspi.dta")
+interaction <- pick("Analysis_Data/intclasspi.dta")
 interaction$var
 table6 <- interaction %>% dplyr::filter(!str_detect(var, ".ccode"))
 interaction <- interaction %>% 
@@ -1416,7 +1416,7 @@ interaction <- interaction %>%
   )
 install.packages("panelAR")
 install.packages("rlang")
-re.sample <- pick("Data/urban_working.dta")
+re.sample <- pick("Analysis_Data/urban_working.dta")
 data <- re.sample %>% 
   select(totalunivers, ccode, year, ww1, ww2, coldwar, party, military,
          urban_working, urban_middle, 
