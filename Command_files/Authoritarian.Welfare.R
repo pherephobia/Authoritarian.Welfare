@@ -29,8 +29,6 @@ library(panelView)
 library(RColorBrewer) 
 library(ggrepel)
 library(tidyverse)
-library(extrafont)
-library(bbplot)
 here::here() %>% setwd()
 getwd()
 
@@ -38,105 +36,17 @@ getwd()
 # Import dataset to use
 ## Dictatorship dataset & GDP & 
 #############################################################
-
-Vdem <- readRDS("Original_Data/Country_Year_V-Dem_Full+others_R_v9/Country_Year_V-Dem_Full+others_R_v9/V-Dem-CY-Full+Others-v9.rds")
-Vdem.s <- 
-  Vdem %>% 
-  select(country_name, COWcode, year, e_lexical_index, v2x_polyarchy,
-         v2xps_party, v2dlunivl,
-         v2psorgs, v2psprbrch, v2psprlnks, v2psplats, v2pscohesv, 
-         v2dlencmps, v2regimpgroup, v2regsupgroupssize,
-         e_cow_exports, e_cow_imports, e_migdpgro, e_migdppc, e_mipopula,
-         e_miurbpop, e_miinteco, e_civil_war, v2x_corr, v2clrspct,
-         v2x_genpp, v2x_cspart, v2regendtype, v2csantimv)
-rm(Vdem)
-#############################################################
-### Welfare coverage and law
-#############################################################
-SPaW <- pick("Original_Data/SPaW_ver2.dta")
-SPaW <- SPaW_ver2
-#############################################################
-###  and Population
-#############################################################
-
-#############################################################
-### Resources and Military size
-#############################################################
-Miller <- miller2015
-Miller <- pick("Original_Data/Miller2015.dta")
-
-Miller <- Miller %>% 
-  select(ccode, year, resdep2, urban, cow_milsize)
-
-#############################################################
-### Control Vaiables
-#############################################################
-#QOG <-  pick("qog_std_ts_jan19.csv")
-#QOG.ctrl <- QOG %>% 
-#  select(ccodecow, year, 
-#         wdi_trade, wdi_pop14, wdi_pop65, wdi_expmil)
-
-#############################################################
-### Make a Base_line dataset
-#############################################################
-
-mdata <- merge(x = Vdem.s, y=SPaW, by.x=c("COWcode", "year"),
-               by.y = c("Ccodecow", "year"), all.x = TRUE)
-mdata <- merge(x = mdata, y=Miller, by.x=c("COWcode", "year"),
-               by.y = c("ccode", "year"), all.x = TRUE)
-#mdata <- merge(x = mdata, y=QOG.ctrl, by.x = c("COWcode", "year"),
-#               by.y = c("ccodecow", "year"), all.x = TRUE)
-foreign::write.dta(mdata, "Analysis_Data/mdata.dta")
-
-names(mdata)
+Analysis_allregime <- ezpickr::pick("Analysis_Data/Analysis_allregime.dta")
 
 
+Analysis_allregime |>  as_tibble() -> Analysis_allregime
 
-mdata <- mdata %>% select(
-  everything(), e_cow_exports, e_cow_imports, v2x_corr, v2clrspct,
-  v2x_genpp, v2x_cspart
-)
-names(mdata)
-#############################################################
-### Aggregate welfare variables
-#############################################################
-mdata <- mdata %>% mutate(
-  totalunivers = univers_oldageprog + 
-    univers_familiy_prog + univers_mater_prog + 
-    univers_oldageprog + univers_sick_prog + 
-    univers_unemp_prog + univers_working_prog)
-
-#normalize <- function(x) {
-# return ((x - min(x)) / (max(x) - min(x)))
-# }
-
-#############################################################
-##### Subset the sample with only authoritarian regimes #####
-#############################################################
-mdata <- mdata %>% mutate(
-  regime = case_when(
-    e_lexical_index < 6 ~ "Autocracies",
-    e_lexical_index ==6 ~ "Democracies"
-  ) %>% parse_factor(., levels = c("Autocracies", "Democracies"),
-                     include_na = F, ordered = T)
-)
-table(mdata$regime)
-
-autocracies <- mdata %>% dplyr::filter(regime == "Autocracies")
-
-#allregime <- mdata %>%
-#  mutate(
-#    ccode = countrycode(country_name, "country.name", "cown")
-#  ) %>% drop_na(ccode)
-# allregime$COWcode <- NULL
-# allregime <- allregime %>% drop_na(ccode, year)
-autocracies <- autocracies %>%
+Analysis_allregime <- Analysis_allregime %>%
   mutate(
     ccode = countrycode::countrycode(country_name, "country.name", "cown")
   ) %>% drop_na(ccode)
-autocracies$COWcode <- NULL
-### Sample describe
-autocracies <- autocracies %>% drop_na(ccode, year)
+Analysis_allregime$COWcode <- NULL
+
 #############################################################
 ##### Regime type and Party Institutionalization Index  #####
 #############################################################
@@ -203,486 +113,6 @@ ggsave("Figures/Plot1.png", width = 8.5, height = 4)
 ######################################################
 ##### Supporting groups in authoritarian regimes #####
 ######################################################
-
-autocracies <- autocracies %>% mutate(
-  class_raw = case_when(
-    v2regimpgroup == 2L ~ "Party elites",
-    v2regimpgroup == 5L ~ "The military",
-    v2regimpgroup == 6L ~ "The ethnic/racial groups",
-    v2regimpgroup == 7L ~ "The religous groups",
-    v2regimpgroup == 1L ~ "Agrarian elites",
-    v2regimpgroup == 8L ~ "Local elites",
-    v2regimpgroup == 3L ~ "Business elites",
-    v2regimpgroup == 4L ~ "Civil servants",
-    v2regimpgroup == 9L ~ "Urban Working",
-    v2regimpgroup == 11L ~ "Rural Working",
-    v2regimpgroup == 10L ~ "Urban Middle",
-    v2regimpgroup == 12L ~ "Rural Middle",
-    v2regimpgroup == 0L ~ "The aristocracy",
-    v2regimpgroup == 13L ~ "A foreign govt or colonial",
-    v2regimpgroup == NA ~ NA_character_,
-    T ~ NA_character_
-  ) %>% 
-    parse_factor(., levels = c("Party elites",
-                               "The military",
-                               "The ethnic/racial groups",
-                               "The religous groups",
-                               "Agrarian elites",
-                               "Local elites",
-                               "Business elites",
-                               "Civil servants",
-                               "Urban Working",
-                               "Rural Working",
-                               "Urban Middle",
-                               "Rural Middle","The aristocracy",
-                               "A foreign govt or colonial"), include_na = F, ordered = T),
-  class_raw.nu = as.numeric(class_raw)
-)
-table(autocracies$class_raw)
-
-autocracies <- autocracies %>% mutate(
-  class = case_when(
-    v2regimpgroup == 2L ~ "Party elites",
-    v2regimpgroup == 5L ~ "The military",
-    v2regimpgroup == 6L ~ "The ethnic/racial/religous groups",
-    v2regimpgroup == 7L ~ "The ethnic/racial/religous groups",
-    v2regimpgroup == 1L ~ "Agrarian/local elites",
-    v2regimpgroup == 8L ~ "Agrarian/local elites",
-    v2regimpgroup == 3L ~ "Business elites/civil servants",
-    v2regimpgroup == 4L ~ "Business elites/civil servants",
-    v2regimpgroup == 9L ~ "Urban Working",
-    v2regimpgroup == 11L ~ "Rural Working",
-    v2regimpgroup == 10L ~ "Urban Middle",
-    v2regimpgroup == 12L ~ "Rural Middle",
-    v2regimpgroup == 0L ~ "The aristocracy",
-    v2regimpgroup == 13L ~ "A foreign govt. or colonial power",
-    T ~ NA_character_
-  ) %>% 
-    parse_factor(., levels = c("Party elites",
-                               "The military",
-                               "The ethnic/racial/religous groups",
-                               "Agrarian/local elites",
-                               "Business elites/civil servants",
-                               "Urban Working",
-                               "Rural Working",
-                               "Urban Middle",
-                               "Rural Middle",
-                               "The aristocracy",
-                               "A foreign govt. or colonial power"), 
-                 include_na = F, ordered = T),
-  class.nu = as.numeric(class)
-) %>% drop_na(class)
-
-names(autocracies)
-
-autocracies <- autocracies %>% 
-  select(
-    country_name, ccode, year, e_lexical_index, v2x_polyarchy, regime,
-    v2xps_party, v2dlunivl, v2psprbrch, v2psprlnks, v2psorgs,
-    v2psplats, v2pscohesv, v2dlencmps, v2regimpgroup, v2regsupgroupssize,
-    class_raw, class_raw.nu,
-    class, class.nu, totalunivers, univers_oldageprog, univers_mater_prog,
-    univers_sick_prog, univers_working_prog, univers_unemp_prog, 
-    univers_familiy_prog, resdep2, urban, cow_milsize, e_migdpgro, e_mipopula,
-    e_migdppc, e_miurbpop, e_miinteco, e_civil_war, v2regendtype, v2csantimv, everything())
-
-############################################################
-### For all regimes
-############################################################
-
-
-allregime <- allregime %>% mutate(
-  class_raw = case_when(
-    v2regimpgroup == 2L ~ "Party elites",
-    v2regimpgroup == 5L ~ "The military",
-    v2regimpgroup == 6L ~ "The ethnic/racial groups",
-    v2regimpgroup == 7L ~ "The religous groups",
-    v2regimpgroup == 1L ~ "Agrarian elites",
-    v2regimpgroup == 8L ~ "Local elites",
-    v2regimpgroup == 3L ~ "Business elites",
-    v2regimpgroup == 4L ~ "Civil servants",
-    v2regimpgroup == 9L ~ "Urban Working",
-    v2regimpgroup == 11L ~ "Rural Working",
-    v2regimpgroup == 10L ~ "Urban Middle",
-    v2regimpgroup == 12L ~ "Rural Middle",
-    v2regimpgroup == 0L ~ "The aristocracy",
-    v2regimpgroup == 13L ~ "A foreign govt or colonial",
-    v2regimpgroup == NA ~ NA_character_,
-    T ~ NA_character_
-  ) %>% 
-    parse_factor(., levels = c("Party elites",
-                               "The military",
-                               "The ethnic/racial groups",
-                               "The religous groups",
-                               "Agrarian elites",
-                               "Local elites",
-                               "Business elites",
-                               "Civil servants",
-                               "Urban Working",
-                               "Rural Working",
-                               "Urban Middle",
-                               "Rural Middle","The aristocracy",
-                               "A foreign govt or colonial"), include_na = F, ordered = T),
-  class_raw.nu = as.numeric(class_raw)
-)
-table(autocracies$class_raw)
-
-allregime <- allregime %>% mutate(
-  class = case_when(
-    v2regimpgroup == 2L ~ "Party elites",
-    v2regimpgroup == 5L ~ "The military",
-    v2regimpgroup == 6L ~ "The ethnic/racial/religous groups",
-    v2regimpgroup == 7L ~ "The ethnic/racial/religous groups",
-    v2regimpgroup == 1L ~ "Agrarian/local elites",
-    v2regimpgroup == 8L ~ "Agrarian/local elites",
-    v2regimpgroup == 3L ~ "Business elites/civil servants",
-    v2regimpgroup == 4L ~ "Business elites/civil servants",
-    v2regimpgroup == 9L ~ "Urban Working",
-    v2regimpgroup == 11L ~ "Rural Working",
-    v2regimpgroup == 10L ~ "Urban Middle",
-    v2regimpgroup == 12L ~ "Rural Middle",
-    v2regimpgroup == 0L ~ "The aristocracy",
-    v2regimpgroup == 13L ~ "A foreign govt. or colonial power",
-    T ~ NA_character_
-  ) %>% 
-    parse_factor(., levels = c("Party elites",
-                               "The military",
-                               "The ethnic/racial/religous groups",
-                               "Agrarian/local elites",
-                               "Business elites/civil servants",
-                               "Urban Working",
-                               "Rural Working",
-                               "Urban Middle",
-                               "Rural Middle",
-                               "The aristocracy",
-                               "A foreign govt. or colonial power"), 
-                 include_na = F, ordered = T),
-  class.nu = as.numeric(class)
-) %>% drop_na(class)
-
-allregime <- allregime %>% 
-  select(
-    country_name, ccode, year, e_lexical_index, v2x_polyarchy, regime,
-    v2xps_party, v2dlunivl, v2psprbrch, v2psprlnks, v2psorgs,
-    v2psplats, v2pscohesv, v2dlencmps, v2regimpgroup, v2regsupgroupssize,
-    class_raw, class_raw.nu,
-    class, class.nu, totalunivers, univers_oldageprog, univers_mater_prog,
-    univers_sick_prog, univers_working_prog, univers_unemp_prog, 
-    univers_familiy_prog, resdep2, urban, cow_milsize, e_migdpgro, e_mipopula,
-    e_migdppc, e_miurbpop, e_miinteco, e_civil_war, everything())
-
-    
-#############################################################
-### Bivariate relationship between Welfare and Classes
-#############################################################
-
-class <-  c("Party elites", "The military", "Agrarian/local elites",
-            "Urban Working", "Urban Middle")
-
-names(autocracies)
-class_summary <- autocracies %>% 
-  select(class, totalunivers, v2regsupgroupssize, v2dlunivl, year) %>%
-  dplyr::filter(class %in% c("Party elites", "The military", 
-                           "Urban Working", "Urban Middle") & 
-                  year > 1916) %>%
-  group_by(class) %>% 
-  summarise(mean.w1 = mean(totalunivers, na.rm = T),
-            sd.w1 = sd(totalunivers, na.rm = T),
-            lower.w1 = mean(totalunivers, na.rm = T) - sd(totalunivers, na.rm = T),
-            upper.w1 = mean(totalunivers, na.rm = T) + sd(totalunivers, na.rm = T),
-            mean.w2 = mean(v2dlunivl, na.rm = T),
-            sd.w2 = sd(v2dlunivl, na.rm = T),
-            lower.w2 = mean(v2dlunivl, na.rm = T) - sd(v2dlunivl, na.rm = T),
-            upper.w2 = mean(v2dlunivl, na.rm = T) + sd(v2dlunivl, na.rm = T))
-
-summary.w <- autocracies %>% dplyr::filter(year > 1916) %>%
-  group_by(class) %>% 
-  summarise(mean.w1 = mean(totalunivers, na.rm = T),
-            mean.w2 = mean(v2dlunivl, na.rm = T),
-            mean.size = mean(v2regsupgroupssize, na.rm = T))
-
-autocracies %>% 
-  dplyr::filter(class %in% c("Party elites", "The military",
-                           "Urban Working", "Urban Middle") & year > 1916) %>% 
-  ggplot(aes(x = totalunivers)) + 
-  geom_density(aes(x = totalunivers, fill = class), 
-               alpha = 0.2, size = 0.2, show.legend = F) + 
-  facet_wrap(~as.factor(class)) + 
-  geom_vline(data=filter(summary.w, class=="Party elites"), 
-             aes(xintercept=mean.w1), colour="black") +
-  geom_text(
-    data    = filter(summary.w, class=="Party elites"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 17.5") +
-  geom_vline(data=filter(summary.w, class=="The military"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="The military"),
-    map = aes(x = mean.w1 + 5, y = 0.05), size = 3,
-    label = "Mean U.I. = 14.7") + 
-  geom_vline(data=filter(summary.w, class=="Urban Working"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Urban Working"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 19.0") + 
-  geom_vline(data=filter(summary.w, class=="Urban Middle"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Urban Middle"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 23.5") + 
-#  scale_fill_manual(values = wes_palette("IsleofDogs1")) + 
-  labs(x = "Universalism Index of SPaW",
-       y = "Density") + 
-#  facet_wrap(~class, ncol = 2) + 
-  theme(
-    element_text(family = "Helvetica"),
-    legend.title = element_blank(),
-    legend.position = "bottom",
-    plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
-    axis.title.x = element_text(
-      margin = margin(t = 25, b = 10)),
-    axis.title.y = element_text(
-      margin = margin(r = 5, l = 5))
-  )
-print(Figure2_1)
-
-
-Figure2_2 <- autocracies %>% 
-  dplyr::filter(class %in% c("Party elites", "The military",
-                             "Urban Working", "Urban Middle") & year > 1916) %>% 
-  ggplot(aes(x = v2dlunivl)) + 
-  geom_density(aes(x = v2dlunivl, fill = class), 
-               alpha = 0.2, size = 0.2, show.legend = F) + 
-  facet_wrap(~as.factor(class)) + 
-  geom_vline(data=filter(summary.w, class=="Party elites"), 
-             aes(xintercept=mean.w2), colour="black") +
-  geom_text(
-    data    = filter(summary.w, class=="Party elites"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = 0.395") + 
-  geom_vline(data=filter(summary.w, class=="The military"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="The military"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = -0.316") + 
-  geom_vline(data=filter(summary.w, class=="Urban Working"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Urban Working"),
-    map = aes(x = mean.w2 + 0.2, y = 0.5), size = 3,
-    label = "Mean U.I. = 1.51") + 
-  geom_vline(data=filter(summary.w, class=="Urban Middle"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Urban Middle"),
-    map = aes(x = mean.w2 + 0.2, y = 0.5), size = 3,
-    label = "Mean U.I. = 0.118") + 
-  scale_fill_manual(values = wes_palette("IsleofDogs1")) + 
-  labs(x = "Universalism Index of VDem",
-       y = "") + 
-  facet_wrap(~class, ncol = 2) + 
-  theme_bw() + 
-  theme(
-    legend.title = element_blank(),
-    legend.position = "bottom",
-    plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
-    axis.title.x = element_text(
-      margin = margin(t = 25, b = 10)),
-    axis.title.y = element_text(
-      margin = margin(r = 5, l = 5))
-  )
-print(Figure2_2)
-Plot2 <- Figure2_1 + Figure2_2 + plot_layout(ncol = 2)
-Plot2 <- Figure2_1
-print(Plot2)
-ggsave("Figures/Plot2.pdf", width = 8.5, height = 5)
-table(autocracies$class_raw)
-
-### Other groups
-autocracies %>% 
-  ggplot(aes(x = totalunivers))
-  geom_density(aes(x = totalunivers, fill = class), 
-               alpha = 0.2, size = 0.2, show.legend = F)
-  
-summary.w
-Figure2_3 <- autocracies %>% 
-  dplyr::filter(class %in% c("The ethnic/racial/religous groups",
-                             "Agrarian/local elites",
-                             "Business elites/civil servants", 
-                             "Rural Middle",
-                             "Rural Working",
-                             "The aristocracy",
-                             "A foreign govt. or colonial power") & 
-                  year > 1915) %>% 
-  ggplot(aes(x = totalunivers)) + 
-  geom_density(aes(x = totalunivers, fill = class), 
-               alpha = 0.2, size = 0.2, show.legend = F) + 
-  facet_wrap(~as.factor(class)) + 
-  geom_vline(data=filter(summary.w, class=="The ethnic/racial/religous groups"), 
-             aes(xintercept=mean.w1), colour="black") +
-  geom_text(
-    data    = filter(summary.w, class=="The ethnic/racial/religous groups"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 11.6") +
-  geom_vline(data=filter(summary.w, class=="Agrarian/local elites"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Agrarian/local elites"),
-    map = aes(x = mean.w1 + 5, y = 0.05), size = 3,
-    label = "Mean U.I. = 8.48") + 
-  geom_vline(data=filter(summary.w, class=="Business elites/civil servants"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Business elites/civil servants"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 12.5") + 
-  geom_vline(data=filter(summary.w, class=="Rural Middle"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Rural Middle"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 18") + 
-  geom_vline(data=filter(summary.w, class=="Rural Working"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Rural Working"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 12.7") + 
-  geom_vline(data=filter(summary.w, class=="The aristocracy"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="The aristocracy"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 5.14") + 
-  geom_vline(data=filter(summary.w, class=="A foreign govt. or colonial power"), 
-             aes(xintercept=mean.w1), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="A foreign govt. or colonial power"),
-    map = aes(x = mean.w1 + 2, y = 0.05), size = 3,
-    label = "Mean U.I. = 13.9") + 
-#  scale_fill_manual(values = wes_palette("IsleofDogs1")) + 
-  labs(x = "Universalism Index of SPaW",
-       y = "Density") + 
-  facet_wrap(~class, ncol = 2) + 
-  theme_bw() + 
-  theme(
-    legend.title = element_blank(),
-    legend.position = "bottom",
-    plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
-    axis.title.x = element_text(
-      margin = margin(t = 25, b = 10)),
-    axis.title.y = element_text(
-      margin = margin(r = 5, l = 5))
-  )
-print(Figure2_3)
-ggsave("Figures/Appendix/Appendix4.pdf", width = 8.5, height = 7)
-
-
-Figure2_4 <- autocracies %>% 
-  dplyr::filter(class %in% c("The ethnic/racial/religous groups",
-                             "Agrarian/local elites",
-                             "Business elites/civil servants", 
-                             "Rural Middle",
-                             "The aristocracy",
-                             "A foreign govt. or colonial power") & 
-                  year > 1915) %>% 
-  ggplot(aes(x = v2dlunivl)) + 
-  geom_density(aes(x = v2dlunivl, fill = class), 
-               alpha = 0.2, size = 0.2, show.legend = F) + 
-  facet_wrap(~as.factor(class)) + 
-  geom_vline(data=filter(summary.w, class=="The ethnic/racial/religous groups"), 
-             aes(xintercept=mean.w2), colour="black") +
-  geom_text(
-    data    = filter(summary.w, class=="The ethnic/racial/religous groups"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = -0.09") +
-  geom_vline(data=filter(summary.w, class=="Agrarian/local elites"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Agrarian/local elites"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = -0.9") + 
-  geom_vline(data=filter(summary.w, class=="Business elites/civil servants"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Business elites/civil servants"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = 0.27") + 
-  geom_vline(data=filter(summary.w, class=="Rural Middle"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Rural Middle"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = -0.72") +
-  geom_vline(data=filter(summary.w, class=="Rural Working"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="Rural Working"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = 1.00") + 
-  geom_vline(data=filter(summary.w, class=="The aristocracy"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="The aristocracy"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = -0.28") + 
-  geom_vline(data=filter(summary.w, class=="A foreign govt. or colonial power"), 
-             aes(xintercept=mean.w2), colour="black") + 
-  geom_text(
-    data    = filter(summary.w, class=="A foreign govt. or colonial power"),
-    map = aes(x = mean.w2 + 0.2, y = 0.4), size = 3,
-    label = "Mean U.I. = -0.07") + 
-  scale_fill_manual(values = wes_palette("IsleofDogs1")) + 
-  labs(x = "Universalism Index of VDem",
-       y = "") + 
-  facet_wrap(~class, ncol = 2) + 
-  theme_bw() + 
-  theme(
-    legend.title = element_blank(),
-    legend.position = "bottom",
-    plot.margin = margin(0.2, 0.2, 0.2, 0.2, "cm"),
-    axis.title.x = element_text(
-      margin = margin(t = 25, b = 10)),
-    axis.title.y = element_text(
-      margin = margin(r = 5, l = 5))
-  )
-print(Figure2_2)
-Appendix2 <- Figure2_3 + Figure2_4 + plot_layout(ncol = 2)
-Appendix5 <- Figure2_2 + Figure2_4 + plot_layout(ncol = 2)
-print(Appendix5)
-ggsave("Figures/Plot2.pdf", width = 8.5, height = 5)
-ggsave("Figures/Appendix/Appendix5.pdf", width = 10, height = 5)
-############################################################
-### All regimes
-############################################################
-
-class <-  c("Party elites", "The military", "Agrarian/local elites",
-            "Urban Working", "Urban Middle")
-
-names(allregime)
-class_summary_all <- allregime %>% 
-  select(class, totalunivers, v2regsupgroupssize, v2dlunivl, year) %>%
-  dplyr::filter(class %in% c("Party elites", "The military", 
-                             "Urban Working", "Urban Middle") & 
-                  year > 1916) %>%
-  group_by(class) %>% 
-  summarise(mean.w1 = mean(totalunivers, na.rm = T),
-            sd.w1 = sd(totalunivers, na.rm = T),
-            lower.w1 = mean(totalunivers, na.rm = T) - sd(totalunivers, na.rm = T),
-            upper.w1 = mean(totalunivers, na.rm = T) + sd(totalunivers, na.rm = T),
-            mean.w2 = mean(v2dlunivl, na.rm = T),
-            sd.w2 = sd(v2dlunivl, na.rm = T),
-            lower.w2 = mean(v2dlunivl, na.rm = T) - sd(v2dlunivl, na.rm = T),
-            upper.w2 = mean(v2dlunivl, na.rm = T) + sd(v2dlunivl, na.rm = T))
-
-summary.all <- allregime %>% dplyr::filter(year > 1916) %>%
-  group_by(class) %>% 
-  summarise(mean.w1 = mean(totalunivers, na.rm = T),
-            mean.w2 = mean(v2dlunivl, na.rm = T),
-            mean.size = mean(v2regsupgroupssize, na.rm = T))
 
 
 
@@ -1021,12 +451,273 @@ democ %>%  ggplot(aes(x=year, y = `n()`)) +
 ##### Data Exports  #####
 #############################################################
 
-sample <- autocracies %>% 
-  dplyr::filter(class %in% c("Party elites", "The military",
-                             "Working classes", "Urban Middle"))
-  
-foreign::write.dta(autocracies, "sample.dta")
 
+sample <- Analysis_allregime |> 
+  dplyr::select(ccode, year, country_name, 
+                regime_boix, lexical_demo, edi, freedom,
+                universality, inst_mass, repression,
+                contains("party_"), alternative,
+                gdp, gdppc, pop, civilwar, resource_income, contains("govt_"))
+
+state_capacity <- ezpickr::pick("Original_data/StateCapacityDataset_v1.dta/StateCapacityDataset_v1.dta")
+
+library(ezpickr)
+
+# qog <- ezpickr::pick(
+#   "http://www.qogdata.pol.gu.se/data/qog_std_ts_jan22.dta"
+#   )
+
+qog |> dplyr::select(ccodecow, year, wdi_internet) -> qog_sub
+
+capacity_sample <- state_capacity |> dplyr::select(ccode, year, Capacity)
+
+sample |> left_join(capacity_sample, by = c("ccode", "year")) -> sample
+
+sample |> left_join(qog_sub, by = c("ccode" = "ccodecow", "year")) -> sample
+
+sample |> group_by(ccode) |> 
+  mutate(
+    inst_mass = factor(inst_mass, 
+                       levels = c(2, 1),
+                       labels = c("Institution-based", "Mass-based")),
+    surveillance = 1 - alternative,
+    internet_close = 100 - wdi_internet,
+    freedom_re = 1-freedom,
+    l_freedom = dplyr::lag(freedom_re, order_by = year, n = 1),
+    l_internet = dplyr::lag(internet_close, order_by = year, n = 1),
+    l_regime_boix = dplyr::lag(regime_boix, order_by = year, n = 1),
+    l_lexical_demo = dplyr::lag(lexical_demo, order_by = year, n = 1),
+    l_universality = dplyr::lag(universality, order_by = year, n = 1),
+    l_inst_mass = dplyr::lag(inst_mass, order_by = year, n = 1),
+    l_party_inst = dplyr::lag(party_inst, order_by = year, n = 1),
+    l_party_org = dplyr::lag(party_org, order_by = year, n = 1),
+    l_party_brch = dplyr::lag(party_brch, order_by = year, n = 1),
+    l_party_link = dplyr::lag(party_link, order_by = year, n = 1),
+    l_repression = dplyr::lag(repression, order_by = year, n = 1),
+    l_party_platform = dplyr::lag(party_platform, order_by = year, n = 1),
+    l_party_cohesv = dplyr::lag(party_cohesv, order_by = year, n = 1),
+    l_alt = dplyr::lag(surveillance, order_by = year, n = 1),
+    l_govt_alt = dplyr::lag(govt_alternative, order_by = year, n = 1),
+    l_govt_monitor = dplyr::lag(govt_monitoring, order_by = year, n = 1),
+    l_govt_censor = dplyr::lag(govt_censor, order_by = year, n = 1),
+    l_gdp = dplyr::lag(gdp, order_by = year, n = 1),
+    l_gdppc = dplyr::lag(gdppc, order_by = year, n = 1),
+    l_pop = dplyr::lag(pop, order_by = year, n = 1),
+    l_civilwar = dplyr::lag(civilwar, order_by = year, n = 1),
+    l_resource = dplyr::lag(resource_income, order_by = year, n = 1),
+    resource_dep = resource_income/gdppc,
+    l_resource_dep = dplyr::lag(resource_dep, order_by = year, n = 1),
+    l_statecapa = dplyr::lag(Capacity, order_by = year, n = 1),
+    gdpgrth = gdp - l_gdp/gdp,
+    l_gdpgrth = dplyr::lag(gdpgrth, order_by = year, n = 1),
+    coldwar = if_else(year >= 1947 & year < 1992, 1L, 0L),
+    l_coldwar = dplyr::lag(coldwar, order_by = year, n = 1),
+  ) -> sample
+
+sample |> dplyr::filter(regime_boix %in% 0L) |> 
+  dplyr::select(
+    ccode, year,
+    universality, l_inst_mass, l_party_inst, l_statecapa, l_freedom,
+    l_gdp, l_gdppc, l_gdpgrth, l_pop, l_civilwar, l_resource_dep) |> drop_na() |> 
+  pull(year) |> unique() |> table()
+
+library(estimatr)
+
+lm(universality ~ 
+            l_inst_mass
+          + as.factor(ccode),
+          #+ as.factor(year),
+          #clusters = ccode, se_type = "stata",
+          data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model1
+
+lm(universality ~ 
+            l_party_inst +
+          + as.factor(ccode),
+          #+ as.factor(year),
+          #clusters = ccode, se_type = "stata",
+          data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model2
+
+lm(universality ~ 
+     l_freedom +
+            + as.factor(ccode),
+          #+ as.factor(year),
+          #clusters = ccode, se_type = "stata",
+          data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model3
+texreg::screenreg(model3, omit.coef = "as.factor")
+
+
+
+lm(universality ~ 
+            l_inst_mass +
+          + l_party_inst
+          + as.factor(ccode),
+          #+ as.factor(year),
+          #clusters = ccode, se_type = "stata",
+          data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model4
+
+lm(universality ~ 
+            l_inst_mass
+          + l_freedom
+          + as.factor(ccode),
+#          + as.factor(year),
+          #clusters = ccode, se_type = "stata",
+          data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model5
+
+lm(universality ~ 
+            l_inst_mass
+          + l_party_inst
+          + l_freedom
+          + as.factor(ccode),
+          #+ as.factor(year),
+          #clusters = ccode, se_type = "stata",
+          data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model6
+
+lm(universality ~ 
+     l_inst_mass
+   + l_party_inst 
+   + l_freedom
+   + l_statecapa
+   #+ I(log(l_gdp + 1))
+   + I(log(l_gdppc + 1)) 
+   #+ I(log(l_pop + 1)) 
+   + l_gdpgrth
+   + l_civilwar 
+   + l_resource_dep 
+   #+ coldwar
+   + as.factor(ccode),
+  # + as.factor(year),
+   #clusters = ccode, se_type = "stata",
+   data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model7
+#  texreg::screenreg(omit.coef = "as.factor", include.ci = FALSE)
+
+lm(universality ~ 
+     l_inst_mass*l_party_inst
+   + l_freedom
+   + l_statecapa
+   #+ l_repression
+   #+ I(log(l_gdp + 1))
+   + I(log(l_gdppc + 1)) 
+   #+ I(log(l_pop + 1)) 
+   + l_gdpgrth
+   + l_civilwar 
+   + l_resource_dep 
+   #+ coldwar
+   + as.factor(ccode),
+   #+ as.factor(year),
+   #clusters = ccode, se_type = "stata"
+   data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model8 
+  #texreg::screenreg(omit.coef = "as.factor") 
+  #marginaleffects::plot_slopes(variables = "l_inst_mass", condition = list("l_party_inst"))
+
+texreg::screenreg(model9, omit.coef = "as.factor")
+
+marginaleffects::plot_slopes(model8, variables = "l_inst_mass", condition = list("l_party_inst")) +
+  labs(x = "\nParty institutionalzation", y = "Marginal effect of mass-based ruling coalition on universal welfare provision\n") ->
+  plot1
+library(latex2exp)
+marginaleffects::plot_slopes(model8, variables = "l_inst_mass", condition = list("l_party_inst")) +
+  labs(x = "\nSurveillance",
+       y =  expression(frac(partialdiff*paste(" (Universal welfare provision)"),
+                            partialdiff*paste(" (Mass-based ruling coalition)"))))
+
+marginaleffects::plot_predictions(model8, condition = list("l_inst_mass", "l_party_inst" = "minmax"))
+
+ggsave("Documents/2_Manuscript/2_Figures/MPSA23_marginalplot.pdf", width = 6, height = 4, dpi = "retina")
+
+lm(universality ~ 
+     l_inst_mass*l_freedom
+   + l_party_inst
+   + l_statecapa
+   #+ l_repression
+   #+ I(log(l_gdp + 1))
+   + I(log(l_gdppc + 1)) 
+   #+ I(log(l_pop + 1)) 
+   + l_gdpgrth
+   + l_civilwar 
+   + l_resource_dep 
+   #+ coldwar
+   + as.factor(ccode),
+#   + as.factor(year),
+   #clusters = ccode, se_type = "CR2",
+   data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model9 
+texreg::screenreg(model9, omit.coef = "as.factor")  
+marginaleffects::plot_slopes(model9, variables = "l_inst_mass", condition = list("l_freedom"))
+
+texreg::screenreg(
+  list(model1, model2, model3, model4, model5, model6, model7, model8, model9),
+  include.ci = F,
+  omit.coef = "as.factor|(Intercept)",
+  custom.coef.names = c(
+    "Ruling Coalition (Mass-based = 1)",
+    "Party Institutionalization",
+    "Surveillance",
+    "State Capacity",
+    #"Ln(GDP)",
+    "Ln(GDPpc)",
+    #"Ln(Population)",
+    "GDP growth",
+    "Civil war experience",
+    "Resource Dependence (per GDPpc)",
+    #"Cold War Period",
+    "Mass-based Coalition$\\times$Party Institutionalization",
+    "Mass-based Coalition$\\times$Surveillance"),
+  reorder.coef = c(1, 2, 3, 9, 10, 4, 5, 6, 7, 8),
+  custom.gof.rows = 
+    list("Country-fixed" = c("YES", "YES", "YES", "YES", "YES", 
+                             "YES", "YES", "YES", "YES"),
+         "No. of countries" = c(
+           "129", "142", "142", "128", "129", "128", "100", "100", "100")))
+
+DAAG::vif(model7)
+
+texreg::texreg(
+  list(model1, model2, model3, model4, model5, model6, model7, model8, model9),
+  include.ci = F,
+  omit.coef = "as.factor|(Intercept)",
+  custom.coef.names = c(
+    "Ruling Coalition (Mass-based = 1)",
+    "Party Institutionalization",
+    "Surveillance",
+    "State Capacity",
+    #"Ln(GDP)",
+    "Ln(GDPpc)",
+    #"Ln(Population)",
+    "GDP growth",
+    "Civil war experience",
+    "Resource Dependence (per GDPpc)",
+    #"Cold War Period",
+    "Mass-based Coalition$\\times$Party Institutionalization",
+    "Mass-based Coalition$\\times$Surveillance"),
+  reorder.coef = c(1, 2, 3, 9, 10, 4, 5, 6, 7, 8),
+  custom.gof.rows = 
+    list("Country-fixed" = c("YES", "YES", "YES", "YES", "YES", 
+                             "YES", "YES", "YES", "YES"),
+         "No. of countries" = c(
+           "129", "142", "142", "128", "129", "128", "100", "100", "100")),
+  file =  "Documents/2_Manuscript/1_Tables/table1.tex")
+getwd()  
+
+
+lm(universality ~ 
+     l_inst_mass* I(l_freedom^2)
+   + l_party_inst
+   + l_statecapa
+   #+ l_repression
+   #+ I(log(l_gdp + 1))
+   + I(log(l_gdppc + 1)) 
+   #+ I(log(l_pop + 1)) 
+   + l_gdpgrth
+   + l_civilwar 
+   + l_resource_dep 
+   #+ coldwar
+   + as.factor(ccode),
+   #+ as.factor(year),
+   #clusters = ccode, se_type = "stata"
+   data = sample |> dplyr::filter(regime_boix %in% 0L)) -> model_test
+  texreg::screenreg(model_test, omit.coef = "as.factor") 
+  
+  marginaleffects::plot_slopes(model_test, variables = "l_inst_mass", condition = list("l_freedom"))
+  
 #############################################################
 ##### Coefplot for Table 1
 #############################################################
@@ -1048,6 +739,27 @@ table1 <- table1 %>%
       rowid > 7 & rowid < 12 ~ "T1M4",
       rowid > 0 & rowid < 8 ~ "T1M6"))
   
+
+
+lm(universality ~ 
+     l_inst_mass
+   + l_freedom
+   + l_party_inst
+   + l_repression
+   + l_statecapa
+   #+ I(log(l_gdp + 1))
+   + I(log(l_gdppc + 1))
+   #+ I(log(l_pop + 1)) 
+   + l_gdpgrth
+   + l_civilwar 
+   + l_resource_dep 
+   #+ coldwar
+   + as.factor(ccode),
+   #+ as.factor(year),
+   #clusters = ccode, se_type = "CR2",
+   data = sample |> dplyr::filter(regime_boix %in% 0L)) |> 
+  texreg::screenreg(omit.coef = "as.factor")
+
 
 table1_spaw <- table1 %>% 
   dplyr::filter(var %in% c("party", "military", "urban_working", "lag3pi") &

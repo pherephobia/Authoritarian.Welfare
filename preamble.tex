@@ -1,0 +1,69 @@
+\usetheme[progressbar=foot, sectionpage = none]{moloch}% modern fork of the metropolis theme
+\setbeamertemplate{footline}[frame number]
+\definecolor{sc}{RGB}{115, 0, 9}
+\setbeamercolor*{frametitle}{bg=sc, fg=white}
+\setbeamercolor*{framesubtitle}{bg=sc, fg=white}
+\setbeamercolor{title separator}{fg=sc}
+\setbeamertemplate{navigation symbols}[horizontal]
+\usepackage{amsmath, setspace, amssymb, booktabs, siunitx, caption, adjustbox, lipsum, lscape, pdflscape, afterpage, capt-of, appendix, graphicx, geometry, bigstrut, tabularx, enumitem, parskip, tikz, rotating, tabulary, tabu, verbatim, mathtools, xpatch,  multicol, hyperref, ltablex, subfig, lineno, changepage, longtable, float,  array,  ragged2e, calc, dirtytalk, fancyhdr}
+\usepackage[flushleft]{threeparttable} 
+\usepackage{lipsum}
+\captionsetup[table]{position=top}   %% or below
+%\renewcommand\harvardyearleft{\unskip, }
+%\renewcommand\harvardyearright[1]{.}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{3}
+\usepackage{chapterbib}
+\usepackage[sectionbib]{natbib}
+\usepackage[symbol]{footmisc}
+
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage[scale=2]{ccicons}
+\usepackage{pgfplots}
+\usepgfplotslibrary{dateplot}
+\usepackage{xspace}
+
+\newcommand{\themename}{\textbf{\textsc{moloch}}\xspace}
+\hypersetup{
+    colorlinks,
+    citecolor=sc,
+    linkcolor=sc
+}
+\setbeamercolor{progress bar}{fg=sc}
+\setbeamercolor{alerted text}{fg=sc}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \addtobeamertemplate{frametitle}{}{%
+%   \ifx\insertframesubtitle\@empty\else%
+%       \usebeamerfont{framesubtitle}%
+%       \usebeamercolor[fg]{framesubtitle}%
+%       \insertframesubtitle%
+%       
+%   \fi%
+%   
+%   }
+%   
+\setbeamercolor*{mini frame}{fg=white,bg=sc}
+\setbeamercolor{section in head/foot}{fg=white, bg=sc}
+\useoutertheme[subsection=false]{miniframes}
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\slideentry}{\advance\beamer@xpos by1\relax}{}{}{}
+\def\beamer@subsectionentry#1#2#3#4#5{\advance\beamer@xpos by1\relax}%
+\makeatother
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\makeatletter
+\setlength{\moloch@progressinheadfoot@linewidth}{1.5pt}
+\setlength{\moloch@titleseparator@linewidth}{1pt}
+\setlength{\moloch@progressonsectionpage@linewidth}{1pt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\setbeamertemplate{mini frames}{}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
