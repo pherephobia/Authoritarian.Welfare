@@ -39,6 +39,7 @@ theme_set(theme_clean())
 
 ## Import Data to use ------------------------------------------------------------------------------
 baseline <- readRDS("Analysis_data/baseline.RDS")
+robust_alt <- readRDS("Analysis_data/robust_alt.RDS")
 
 #### Figure 1: Distribution of coalition
 #### 2.2 %
