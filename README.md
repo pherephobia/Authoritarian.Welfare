@@ -5,7 +5,7 @@
   - [02_Figures](https://github.com/pherephobia/Authoritarian.Welfare/blob/df045631b858688901f6b39f15f4ba50f56e297f/Command_files/02_AutoWelf_Figures.R)
   - [03 Empirical Analyses](https://github.com/pherephobia/Authoritarian.Welfare/blob/df045631b858688901f6b39f15f4ba50f56e297f/Command_files/03_AutoWelf_Analysis.R)
   - [04 Robustness Checks](https://github.com/pherephobia/Authoritarian.Welfare/blob/df045631b858688901f6b39f15f4ba50f56e297f/Command_files/04_Robustness%20Checks.R)
-- The Working draft ([pdf]([https://github.com/pherephobia/Authoritarian.Welfare/blob/master/Documents/2_Manuscript/Park_2020_Manuscript.pdf)](https://github.com/pherephobia/Authoritarian.Welfare/blob/df045631b858688901f6b39f15f4ba50f56e297f/Documents/2_Manuscript/working_manuscript.pdf)) has been presented at:
+- The Working draft ([pdf](https://github.com/pherephobia/Authoritarian.Welfare/blob/master/Documents/2_Manuscript/Park_2020_Manuscript.pdf(https://github.com/pherephobia/Authoritarian.Welfare/blob/df045631b858688901f6b39f15f4ba50f56e297f/Documents/2_Manuscript/working_manuscript.pdf)) has been presented at:
   - the MPSA Annual Meeting, April, 2020.
   - the SPSA Annual Meeting, January, 2020.
   - the MPSA Annual Meeting, April 2023.
