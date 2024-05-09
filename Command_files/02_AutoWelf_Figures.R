@@ -40,123 +40,12 @@ theme_set(theme_clean())
 ## Import Data to use ------------------------------------------------------------------------------
 baseline <- readRDS("Analysis_data/baseline.RDS")
 robust_alt <- readRDS("Analysis_data/robust_alt.RDS")
+load("Analysis_data/main_bench.RData")
+load("Analysis_data/main_full.RData")
+load("Analysis_data/jackknife_full4.RData")
 
-#### Figure 1: Distribution of coalition
-#### 2.2 %
-baseline |> 
-  dplyr::filter(brm_regime %in% "Autocracies (BRM)") |> 
-  #drop_na(year, mass_coalition) |> 
-  dplyr::filter(year > 1959 & year < 2021) |> 
-  dplyr::filter(coalition %in% c(2, 5, 9, 10, 11, 12)) |> 
-  #group_by(year, mass_coalition) |> count() |> ungroup() -> figure1
-  drop_na(coalition, year) |> 
-  mutate(
-    coalition_agg = case_when(
-      coalition %in% 2L ~ "Party elites",
-      coalition %in% 5L ~ "Military elites",
-      coalition %in% c(9L, 11L) ~ "Working class",
-      coalition %in% c(10L, 12L) ~ "Middle class",
-      T ~ NA_character_
-    ),
-    coalition_agg = factor(coalition_agg,
-                           levels = c("Party elites", "Military elites",
-                                      "Working class", "Middle class"))) |> 
-  group_by(coalition_agg, year) |> 
-  count()  |> ungroup() |> 
-  group_by(year) |> mutate(total = sum(n),
-                           share = n/total) |> ungroup() |> 
-  group_by(coalition_agg) |> 
-  mutate(
-    label = if_else(year == max(year), 
-                    as.character(coalition_agg), NA_character_)) |> ungroup() -> figure1
-
-figure1 |> dplyr::filter(coalition_agg %in% c("Working class", "Middle class")) |> 
-  print(n = Inf)
-
-figure1 |> 
-  ggplot(aes(x = year, y = share)) +
-  geom_path(aes(color = coalition_agg, 
-                fill = coalition_agg), show.legend = F, alpha = 1) +
-  ggrepel::geom_label_repel(aes(x = year, label = label, color = coalition_agg), size = 5,
-                            min.segment.length = Inf, 
-                            na.rm = TRUE, show.legend = F) + 
-  #ggsci::scale_color_nejm() +
-  #ggsci::scale_fill_nejm() +
-  scale_color_manual(values = c(futurevisions::futurevisions("mars")[1],
-                                futurevisions::futurevisions("mars")[3],
-                                futurevisions::futurevisions("mars")[4],
-                                "darkgreen")) +
-  scale_fill_manual(values = c(futurevisions::futurevisions("mars")[1],
-                               futurevisions::futurevisions("mars")[3],
-                               futurevisions::futurevisions("mars")[4],
-                               "darkgreen")) +
-  scale_y_continuous(labels = scales::percent_format(),
-                     breaks = c(seq(0, 1, 0.1))) +
-  scale_x_continuous(breaks = c(seq(1900, 2020, 10))) +
-  labs(y = "Share of countries with group in ruling coalition\n", x = "\nYear",
-       #title = "Social groups of Masses and Elites in Regime Coalitions, Globally. 1789-2020"
-         ) +
-  theme(legend.position = "bottom",
-        legend.text = element_text(size=9),
-        axis.text = element_text(size = 14),
-        axis.title = element_text(size = 14))
-
-ggsave("Documents/2_Manuscript/2_Figures/fig1_brm.pdf",
-       width = 8.5, height = 5, dpi = "retina")
-
-#### Figure 1A Alternative Coalition
-baseline |> 
-  dplyr::filter(brm_regime %in% "Autocracies (BRM)") |> 
-  dplyr::filter(year > 1959 & year < 2021) |> 
-  drop_na(alt_mass_part_coalition, year) |> 
-  mutate(
-    coalition_alt = case_when(
-      alt_mass_part_coalition %in% 1L ~ "Mass-inclusive coalition",
-      alt_mass_part_coalition %in% 0L ~ "Non-mass coalition",
-      T ~ NA_character_),
-    coalition_alt = factor(coalition_alt,
-                           levels = c("Non-mass coalition", "Mass-inclusive coalition"))) |> 
-  group_by(coalition_alt, year) |> 
-  count()  |> ungroup() |> 
-  group_by(year) |> mutate(total = sum(n),
-                           share = n/total) |> ungroup() |> 
-  group_by(coalition_alt) |> 
-  mutate(
-    label = if_else(year == max(year), 
-                    as.character(coalition_alt), NA_character_)) |> ungroup() -> figure1A_robust
-figure1A_robust |> 
-  dplyr::filter(coalition_alt %in% c("Non-mass coalition", "Mass-inclusive coalition")) |> 
-  print(n = Inf)
-
-figure1A_robust |> 
-  ggplot(aes(x = year, y = share)) +
-  geom_path(aes(color = coalition_alt, 
-                fill = coalition_alt), show.legend = F, alpha = 1) +
-  ggrepel::geom_label_repel(aes(x = year, label = label, color = coalition_alt), size = 5,
-                            min.segment.length = Inf, 
-                            nudge_y = 0.1,
-                            na.rm = TRUE, show.legend = F) + 
-  #ggsci::scale_color_nejm() +
-  #ggsci::scale_fill_nejm() +
-  scale_color_manual(values = c(futurevisions::futurevisions("mars")[1],
-                                futurevisions::futurevisions("mars")[3])) +
-  scale_fill_manual(values = c(futurevisions::futurevisions("mars")[1],
-                               futurevisions::futurevisions("mars")[3])) +
-  scale_y_continuous(labels = scales::percent_format(),
-                     breaks = c(seq(0, 1, 0.1))) +
-  scale_x_continuous(breaks = c(seq(1900, 2020, 10))) +
-  labs(y = "Share of countries with mass-inclusive and\nnon-mass groups in the ruling coalition\n", x = "\nYear",
-       #title = "Social groups of Masses and Elites in Regime Coalitions, Globally. 1789-2020"
-  ) +
-  theme(legend.position = "bottom",
-        legend.text = element_text(size=9),
-        axis.text = element_text(size = 14),
-        axis.title = element_text(size = 14))
-
-ggsave("Documents/2_Manuscript/2_Figures/fig1A_robust_brm.pdf",
-       width = 8.5, height = 5, dpi = "retina")
-
-#### Figure2 ####
+#### Figure 1 Distribution of the universalism index of V-Dem by mass-based coalition and ----------
+####          elite-based coalition, 1960-2020
 
 baseline |> 
   dplyr::filter(brm_regime %in% "Autocracies (BRM)") |> 
@@ -167,91 +56,39 @@ baseline |>
                             levels = c("Institution-based",
                                        "Mass-based"),
                             labels = c("Elite-based coalition",
-                                       "Mass-based coalition"))) -> figure2
+                                       "Mass-based coalition"))) -> figure1
 
-summary_fig2A <- figure2 |> group_by(mass_coalition) |> 
+summary_fig1 <- figure1 |> group_by(mass_coalition) |> 
   summarize(mean = mean(universality, na.rm = T))
 
-robust_alt |> 
-  dplyr::filter(brm_regime %in% "Autocracies (BRM)") |> 
-  dplyr::filter(year > 1959 & year < 2021) -> figure2B
 
-summary_fig2B <- figure2B |> group_by(mass_inclusive_T050) |> 
-  summarize(mean = mean(universality, na.rm = T)) |> drop_na()
-
-bind_rows(summary_fig2A |> mutate(group = c(1, 2)) |> 
-            rename(coalition = mass_coalition),
-          summary_fig2B |> mutate(group = c(1, 2),
-                                  mass_inclusive_T050 = factor(
-                                    mass_inclusive_T050, levels = c(0, 1),
-                                    labels = c("Non-mass coalition", "Mass-inclusive coalition"))) |> 
-            rename(coalition = mass_inclusive_T050)) ->
-  summary_fig2_comb
-
-bind_rows(figure2 |> dplyr::select(universality, coalition = mass_coalition) |> 
-            mutate(group = case_when(
-              coalition %in% "Elite-based coalition" ~ 1L,
-              coalition %in% "Mass-based coalition" ~ 2L)),
-          figure2 |> dplyr::select(universality, coalition = coalition_alt) |> 
-            mutate(group = case_when(
-              coalition %in% "Non-mass coalition" ~ 1L,
-              coalition %in% "Mass-inclusive coalition" ~ 2L))) ->
-  figure2_comb
-
-figure2_comb |> drop_na(group) |> 
-  mutate(group = factor(group,
-                        levels = c(1, 2),
-                        labels = c("Elite-based coalition", "Mass-based coalition"))) |>
-  ggplot(aes(x = universality, color = coalition)) +
-  geom_density(aes(fill = coalition), show.legend = F, alpha = 0.6) +
-#  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
+figure1 |> drop_na(mass_coalition) |> 
+  ggplot(aes(x = universality, color = mass_coalition)) +
+  geom_density(aes(fill = mass_coalition), show.legend = F, alpha = 0.6) +
+  geom_vline(xintercept = 0, linetype = "dashed", color = "black") +
   geom_vline(
-    data = summary_fig2_comb |> 
-      mutate(group = factor(group,
-                            levels = c(1, 2),
-                            labels = c("Elite-based coalition", "Mass-based coalition"))),
+    data = summary_fig1,
     aes(xintercept = mean,
-        color = coalition), show.legend = F) +
-  # ggrepel::geom_label_repel(
-  #   data = summary_fig2_comb |>
-  #     mutate(group = factor(group,
-  #                           levels = c(1, 2),
-  #                           labels = c("Elite-based coalition", "Mass-based coalition"))),
-  #   aes(x = mean,
-  #       color = coalition,
-  #       label = paste0("Mean of U.I. for\n", coalition, "\n", as.character(round(mean, 2)))),
-  #   y = 0.5,
-  #   size = 5,
-  #   nudge_y = 0.5,
-  #   nudge_x = 0.5,
-  #   show.legend = F) +
-  geom_text(
-  data = summary_fig2_comb |>
-    mutate(group = factor(group,
-                          levels = c(1, 2),
-                          labels = c("Elite-based coalition", "Mass-based coalition"))),
-  aes(x = -3.5,
-      label = paste0("Mean of U.I. for\n", coalition, "\n= ", as.character(round(mean, 2)))),
-  y = c(0.65,  0.65, 0.48, 0.48),
-  color = "black",
-  size = 4,
-  lineheight = 0.7,
-  # nudge_y = 0.5,
-  # nudge_x = 0.5,
-  hjust = 0,
-  show.legend = F) +
+        color = mass_coalition), show.legend = F) +
+  ggrepel::geom_label_repel(
+    data = summary_fig1,
+    aes(x = mean,
+        color = mass_coalition,
+        label = round(mean, 2)), fill = "white",
+    y = 0.5,
+    size = 5,
+    nudge_y = 0.5,
+    nudge_x = 0.5,
+    show.legend = F) +
+  facet_wrap(~mass_coalition) +
   scale_color_manual(values = c(futurevisions::futurevisions("mars")[1],
-                                futurevisions::futurevisions("mars")[3],
-                                "grey60", "#BECEDD")) +
+                                futurevisions::futurevisions("mars")[3])) +
   scale_fill_manual(values = c(futurevisions::futurevisions("mars")[1],
-                               futurevisions::futurevisions("mars")[3],
-                               "grey60", "#BECEDD")) +
-  #gghighlight::gghighlight(coalition %in% c("Elite-based coalition", "Mass-based coalition")) +
+                               futurevisions::futurevisions("mars")[3])) +
   scale_y_continuous() +
   labs(y = NULL, x = "\nUniversalism index of V-Dem\n",
-       caption = str_wrap("\nNote: The figure presents two panels comparing the distribution of welfare universalism in elite-based (left) and mass-based (right) coalitions. The solid areas represent the primary data for each type of coalition, while the lighter shaded areas show alternative measurements for non-mass and mass-inclusive coalitions, respectively. The value of zero indicates the point where welfare policies are equally divided between means-tested and universalistic approaches.",
+       caption = str_wrap("\nNote: The figure presents two panels comparing the distribution of welfare universalism in elite-based (left) and mass-based (right) coalitions with their averages of welfare universalism. The value of zero indicates the point where welfare policies are equally divided between means-tested and universalistic approaches.",
                           100, exdent = 10)) +
-  facet_wrap(~group) +
   theme(legend.position = "bottom",
         legend.text = element_text(size=9),
         strip.text = element_text(size = 16),
@@ -259,5 +96,127 @@ figure2_comb |> drop_na(group) |>
         axis.text = element_text(size = 14),
         axis.title = element_text(size = 14))
 
-ggsave("Documents/2_Manuscript/2_Figures/fig2_brm.pdf", 
+ggsave("Documents/2_Manuscript/2_Figures/fig1.pdf", 
        width = 7, height = 5.5, dpi = "retina")
+
+
+#### Figure 2 Marginal Effect of Mass Coalition by Mass Party Organization Level -------------------
+# jk_full4_brm <- data.frame()
+# mpo_int <- c(seq(-5, 10, 0.01))
+# coef_f4main_brm <- MASS::mvrnorm(n = 4000, mu = coef(brm_full_tfixed4), Sigma = vcov(brm_full_tfixed4))
+# me_f4main_brm <- coef_f4main_brm[, c("l_mass_coalition", "l_mass_coalition:l_massparty")] %*% rbind(1, mpo_int) 
+# f4main_brm_df <- data.frame(
+#   MPO = mpo_int,
+#   Mean = apply(me_f4main_brm, 2, mean, na.rm = T),
+#   lower = apply(me_f4main_brm, 2, quantile, probs = 0.025, na.rm = T),
+#   upper = apply(me_f4main_brm, 2, quantile, probs = 0.975, na.rm = T)
+# ) |> mutate(Exclude = paste0("No County excluded"),
+#             id = paste0("0"))
+# 
+# for (i in 1:length(unique_COWfull_brm)) {
+#   tryCatch({
+#     model <- glm(
+#       universality ~ l_mass_coalition*l_massparty + log(l_gdppc+1) + l_gdpgrth + 
+#         l_lnresource + l_civilwar + l_repression + l_CSOconsult + l_CSOpart +
+#         l_hereditaryindex + l_militaryindex + l_partyindex + l_personindex +
+#         as.factor(COWcode) + as.factor(year),
+#       data = baseline |> 
+#         dplyr::filter(brm_regime %in% "Autocracies (BRM)" & !COWcode %in% unique_COWfull_brm[i]))
+#     mpo_int <- c(seq(-5, 10, 0.01))
+#     coef <- MASS::mvrnorm(n = 4000, mu = coef(model), Sigma = vcov(model))
+#     me <- coef[, c("l_mass_coalitionMass-based", "l_mass_coalitionMass-based:l_massparty")] %*% rbind(1, mpo_int) 
+#     temp_df <- data.frame(
+#       MPO = mpo_int,
+#       Mean = apply(me, 2, mean, na.rm = T),
+#       lower = apply(me, 2, quantile, probs = 0.025, na.rm = T),
+#       upper = apply(me, 2, quantile, probs = 0.975, na.rm = T)
+#     ) |> 
+#       mutate(Exclude = paste0("County ", unique_COWfull_brm[i], " excluded"),
+#              id = paste0(unique_COWfull_brm[i]))
+#     jk_full4_brm <- jk_full4_brm |> bind_rows(temp_df)
+#   }, error = function(e) {
+#     message(paste("Error in iteration", i, ":", e$message))
+#     # Optionally, you can log or handle the error here
+#   })
+# }
+# 
+# jk_full4_brm |> bind_rows(f4main_brm_df) ->
+#   jk_full4_brm_final
+# 
+# baseline |> 
+#   dplyr::filter(brm_regime %in% "Autocracies (BRM)") |> 
+#   dplyr::select(COWcode, universality, l_mass_coalition, l_massparty,
+#                 l_gdppc, l_gdpgrth, l_lnresource, l_civilwar, l_repression, 
+#                 l_CSOconsult, l_CSOpart, l_hereditaryindex, l_militaryindex, 
+#                 l_partyindex, l_personindex) |> drop_na() |> 
+#   summarize(
+#     massparty = quantile(l_massparty, probs = c(0.1, 0.9), na.rm = T),
+#     meanlngdppc = mean(log(l_gdppc + 1), na.rm = T),
+#     meangdpgrth = mean(l_gdpgrth, na.rm = T),
+#     meanresource = mean(l_lnresource, na.rm = T),
+#     meancivilwar = median(l_civilwar, na.rm = T),
+#     meanrepression = mean(l_repression, na.rm = T),
+#     meancsocon = mean(l_CSOconsult, na.rm = T),
+#     meancsopart = mean(l_CSOpart, na.rm = T),
+#     meanhereditary = mean(l_hereditaryindex, na.rm = T),
+#     meanmilitary = mean(l_militaryindex, na.rm = T),
+#     meanparty = mean(l_partyindex, na.rm = T),
+#     meanpersonal = mean(l_personindex, na.rm = T)
+#   ) -> check_brm
+# 
+# coef(brm_full_tfixed4)[1]*1 + coef(brm_full_tfixed4)[14]*as.numeric(check_brm[1, 1])  -> low
+# 
+# coef(brm_full_tfixed4)[1]*1 + coef(brm_full_tfixed4)[14]*check_brm[2, 1] -> high
+# 
+# point <- data.frame(MPO = c(as.numeric(check_brm[1, 1]), as.numeric(check_brm[2, 1])),
+#                     Mean =c(as.numeric(low), as.numeric(high)) ,
+#                     id = c("0", "0"))
+
+jk_full4_brm_final |> 
+  ggplot(aes(x = MPO, y = Mean)) +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "grey20") +
+  geom_line(aes(color = id), linetype = "dashed", show.legend = F) +
+  geom_line(aes(y = lower, color = id), show.legend = F) +
+  geom_line(aes(y = upper, color = id), show.legend = F) +
+  geom_point(data = point, aes(MPO, Mean, fill = id),
+             shape = 21, size = 3, show.legend = F) +
+  scale_color_viridis_d() +
+  scale_x_continuous(breaks = c(seq(-5, 10, 1)), expand = c(.05,.05)) +
+  scale_y_continuous(breaks = c(seq(0, 7, 1))) +
+  labs(x = NULL, y = "Estimated marginal effects\n") +
+  gghighlight::gghighlight(id %in% "0", use_direct_label = FALSE) +
+  theme(axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.text = element_text(size = rel(1.3)),
+        axis.title = element_text(size = rel(1.5)),
+        plot.caption = element_text(size = rel(1.3))) -> ME_sim
+
+
+baseline |> 
+  dplyr::filter(brm_regime %in% "Autocracies (BRM)") |> 
+  ggplot(aes(x = l_massparty, y = ..density..)) + 
+  geom_histogram(color = "black", fill = "white") +
+  scale_x_continuous(breaks = c(seq(-5, 10, 1)), lim = c(-5, 10), expand = c(.05,.05)) +
+  labs(x = expression('Mass Party Organization Index'[t-1]), y = "Density\n",
+       caption = str_wrap("\nNote: The figure depicts the impact of mass-based coalitions on welfare universalism, with the main result from the full model highlighted in color. Each line plot is shown with 95% confidence intervals. The colored points represent the estimated marginal effects at the bottom and top ten percentiles of the mass party organization index. Grey lines represent the marginal effects of models using the jackknife method, with each model excluding one country from the analysis.", 100, exdent = 10)) +
+  theme(plot.caption = element_text(hjust = 0, size = rel(1.3)),
+        axis.text = element_text(size = rel(1.3)),
+        axis.title = element_text(size = rel(1.5)))-> MPO_hist
+
+library(patchwork)
+library(ggExtra)
+
+ME_sim + MPO_hist +
+  patchwork::plot_layout(
+    ncol = 1, 
+    nrow = 2, 
+    widths = 4,
+    heights = c(6.5, 1.5)
+  )
+
+ggsave("Documents/2_Manuscript/2_Figures/Fig2.pdf",
+       width = 9, height = 7, dpi = 1600)
+
+
+
+
